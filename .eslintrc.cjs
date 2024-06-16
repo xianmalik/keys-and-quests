@@ -23,7 +23,11 @@ module.exports = {
 
   // Base config
   extends: ["eslint:recommended"],
-
+  rules: {
+    'react/prop-types': ['error', {
+      ignore: ['className']
+    }]
+  },
   overrides: [
     // React
     {

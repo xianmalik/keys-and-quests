@@ -1,5 +1,12 @@
 import type { MetaFunction } from "@remix-run/node";
 
+import { json } from '@remix-run/node';
+import client from '~/sanityClient';
+
+import Layout from "~/components/Layout";
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar"
+import { useLoaderData } from "@remix-run/react";
+
 export const meta: MetaFunction = () => {
   return [
     { title: "New Remix App" },
@@ -7,42 +14,65 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export const loader = async () => {
+  const query = `*[_type == "post"] {
+    ...,
+    author->,
+    mainImage {
+      ...,
+      asset->
+    },
+    categories[]->,
+    body
+  }`; // Replace with your query
+  const data = await client.fetch(query);
+  return json(data);
+};
+
 export default function Index() {
+  const data = useLoaderData<Post[]>();
+
+  function formatDate(date: Date | string) {
+    return new Date(date).toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    })
+  }
+
   return (
-    <div className="font-sans p-4">
-      <h1 className="text-3xl">Welcome to Remix</h1>
-      <ul className="list-disc mt-4 pl-6 space-y-2">
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/quickstart"
-            rel="noreferrer"
-          >
-            5m Quick Start
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/tutorial"
-            rel="noreferrer"
-          >
-            30m Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/docs"
-            rel="noreferrer"
-          >
-            Remix Docs
-          </a>
-        </li>
-      </ul>
-    </div>
+    <Layout>
+      <div className="mx-auto max-w-screen-xl px-4 my-8 md:mb-10 lg:mb-16">
+        <h1 className="text-lg lg:text-4xl mb-16 mt-8 font-bold tracking-wide lg:text-center">
+          Switch Reviews by Keys & Quests
+        </h1>
+        <div className="grid grid-cols-1 gap-y-4 gap-x-5 lg:gap-x-12 lg:gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+          {data?.map(({ title, slug, mainImage, author, _createdAt }, idx) => (
+            <a href={"/post/" + slug.current} className="flex flex-col" key={idx}>
+              <div className="flex flex-1 flex-col overflow-hidden rounded-2xl border border-gray300 shadow-lg">
+                <div>
+                  <img alt={title} src={mainImage.asset.url} className="object-cover aspect-[16/10] w-full transition-all" />
+                </div>
+                <div className="flex flex-1 flex-col py-3 px-4 md:px-5 md:py-4 lg:px-7 lg:py-5">
+                  <p className="text-xl mb-2 text-gray800 md:mb-3">
+                    {title}
+                  </p>
+                  <div className="mt-auto flex items-center">
+                    <div className="flex items-center gap-2">
+                      <Avatar className="h-6 w-6">
+                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarFallback>KQ</AvatarFallback>
+                      </Avatar>
+                      <span className="text-xs leading-none text-gray600">{author.name}</span>
+                    </div>
+                    <div className="ml-auto pl-2 text-xs text-gray600">{formatDate(_createdAt)}</div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </Layout>
   );
 }
