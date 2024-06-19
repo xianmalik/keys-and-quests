@@ -5,6 +5,7 @@ import axios from "axios";
 import Image from "next/image";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -38,15 +39,20 @@ export default function Home() {
         Switch Reviews by Keys & Quests
       </h1>
       <div className="grid grid-cols-1 gap-y-4 gap-x-5 lg:gap-x-12 lg:gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-        {posts.length > 0 && posts?.map(({ title, slug, mainImage, author, _createdAt }, idx) => (
+        {posts.length > 0 && posts?.map(({ title, switchType, slug, mainImage, author, _createdAt }, idx) => (
           <a href={"/post/" + slug.current} className="flex flex-col" key={idx}>
             <div className="flex flex-1 flex-col overflow-hidden rounded-2xl border border-gray300 shadow-lg">
               <div>
                 <Image alt={title} width={400} height={400} src={mainImage.asset.url} className="object-cover aspect-[16/10] w-full transition-all" />
               </div>
               <div className="flex flex-1 flex-col py-3 px-4 md:px-5 md:py-4 lg:px-7 lg:py-5">
-                <p className="text-xl mb-2 text-gray800 md:mb-3">
+                <p className="text-xl mb-1 text-gray800 md:mb-2">
                   {title}
+                </p>
+                <p className="mb-4">
+                  <Badge variant="outline" className="uppercase text-xs tracking-wider rounded-full">
+                    {switchType.name}
+                  </Badge>
                 </p>
                 <div className="mt-auto flex items-center">
                   <div className="flex items-center gap-2">

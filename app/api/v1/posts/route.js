@@ -9,10 +9,11 @@ export async function GET() {
       ...,
       asset->
     },
+    brand->,
+    switchType->,
     categories[]->,
     body
   }`
-
 
   try {
     const posts = await client.fetch(query)

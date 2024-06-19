@@ -1,7 +1,6 @@
 import { Urbanist as Sans } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
 import "./globals.css";
 
 const sans = Sans({ subsets: ["latin"] });
