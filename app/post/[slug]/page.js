@@ -1,13 +1,12 @@
 'use client'
 
 import { useEffect, useState } from "react"
+import axios from "axios";
+import Image from "next/image";
 import { PortableText } from '@portabletext/react'
-
-import { client } from '@/lib/sanity/client';
 
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import Image from "next/image";
 import { AlignBottomIcon, BlendingModeIcon, BorderBottomIcon, BorderTopIcon, CommitIcon, Component1Icon, ComponentBooleanIcon, Crosshair2Icon } from "@radix-ui/react-icons";
 
 export default function Post({ params }) {
@@ -15,27 +14,14 @@ export default function Post({ params }) {
 
   useEffect(() => {
     async function fetchData() {
-      const { slug } = params
+      const response = await axios.get(`/api/v1/posts/${params.slug}`);
+      if (!response) return;
 
-      const query = `*[_type == "post" && slug.current == $slug][0] {
-        ...,
-        author->,
-        mainImage {
-          ...,
-          asset->
-        },
-        price->,
-        brand->,
-        material->,
-        actuation->,
-        switchType->,
-        lubeStatus->,
-        categories[]->,
-        body
-      }`
+      const { data } = response;
 
-      const data = await client.fetch(query, { slug })
-      setData(data)
+      if (!data.success) return;
+
+      setData(data.post)
     }
 
     fetchData()
@@ -52,11 +38,11 @@ export default function Post({ params }) {
   return data ? (
     <>
       <div className="mx-auto max-w-screen-xl w-full px-4 my-16">
-        <div className="flex flex-col items-center overflow-hidden rounded-2xl border border-gray300 shadow-lg lg:flex-row-reverse">
-          <div className="flex-1 basis-1/3">
-            <Image alt={data.title} className="w-full transition-all" src={data.mainImage.asset.url} height={280} width={280} />
+        <div className="grid grid-cols-1 md:grid-cols-3 overflow-hidden rounded-2xl border border-gray300 shadow-lg md:flex-row-reverse">
+          <div className="md:order-last">
+            <Image alt={data.title} className="w-full h-full object-cover transition-all" src={data.mainImage.asset.url} height={280} width={280} />
           </div>
-          <div className="relative flex flex-1 basis-2/3 flex-col justify-center py-6 px-8 lg:px-16 lg:py-12 xl:px-24">
+          <div className="relative col-span-2 flex flex-col justify-center py-6 px-8 lg:px-16 lg:py-12 xl:px-24">
             <div className="mb-2 flex flex-wrap items-center">
               <div className="flex items-center">
                 <div className="mr-2 overflow-hidden rounded-full border border-blue500">
@@ -68,10 +54,13 @@ export default function Post({ params }) {
                 <span className="text-xs leading-none text-gray600">{data.author.name}</span>
               </div>
             </div>
-            <h1 className='text-[2.5rem] font-semibold'>{data.title}</h1>
+            <h1 className='text-[2.5rem] font-semibold leading-none mb-4'>
+              {data.title}
+              {!!data.tag && ` | ${data.tag}`}
+            </h1>
             <div className="flex items-center gap-2 font-light mb-8">
               {data.categories?.map(({ _id, title }) => (
-                <Badge key={_id}>{title}</Badge>
+                <Badge className="tracking-wider rounded-full" key={_id}>{title}</Badge>
               ))}
             </div>
             <div className="flex flex-col items-start text-sm font-light mb-6 gap-1 text-gray-600">
@@ -124,6 +113,16 @@ export default function Post({ params }) {
             },
           }}
         />
+        {data.youtube && (
+          <iframe
+            className="mx-auto my-8 max-w-lg w-full aspect-[9/16]"
+            src={data.youtube}
+            title={data.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen>
+          </iframe>
+        )}
       </article>
     </>
   ) : (

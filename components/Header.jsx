@@ -51,8 +51,8 @@ export default function Header() {
   return (
     <header className="bg-white py-4 shadow">
       <div className='max-w-screen-xl mx-auto px-4'>
-        <div className="flex justify-between items-center">
-          <a href="/" className="text-xl font-bold tracking-widest uppercase">
+        <div className="flex justify-center items-center">
+          <a href="/" className="text-xl font-bold tracking-widest uppercase text-center">
             Keys & Quests
           </a>
           {/* <NavigationMenu>

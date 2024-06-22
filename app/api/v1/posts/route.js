@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { client } from "@/lib/sanity/client"
 
 export async function GET() {
-  const query = `*[_type == "post"] {
+  const query = `*[_type == "post"] | order(_createdAt desc) {
     ...,
     author->,
     mainImage {
