@@ -6,7 +6,8 @@
 //   NavigationMenuList,
 //   NavigationMenuTrigger,
 //   navigationMenuTriggerStyle,
-// } from "~/components/ui/navigation-menu"
+// } from "@/components/ui/navigation-menu"
+import Link from "next/link";
 // import { cn } from "~/lib/utils";
 
 // const components: { title: string; href: string; description: string }[] = [
@@ -51,10 +52,17 @@ export default function Header() {
   return (
     <header className="bg-white py-4 shadow">
       <div className='max-w-screen-xl mx-auto px-4'>
-        <div className="flex justify-center items-center">
-          <a href="/" className="text-xl font-bold tracking-widest uppercase text-center">
+        <div className="flex justify-between items-center">
+          <a href="/" className="text-xl font-bold tracking-widest uppercase">
             Keys & Quests
           </a>
+          <div>
+            <ul className="flex items-center justify-end gap-2 md:gap-6 px-2">
+              <li>
+                <Link href="/">Home</Link>
+              </li>
+            </ul>
+          </div>
           {/* <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
