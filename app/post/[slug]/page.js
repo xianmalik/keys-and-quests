@@ -106,7 +106,7 @@ export default function Post({ params }) {
               </div>
             </div>
           </div>
-          <article className='mx-auto max-w-4xl my-16 px-4'>
+          <article className='mx-auto max-w-4xl w-full my-16 px-4'>
             <PortableText
               value={data?.body}
               components={{
@@ -140,9 +140,11 @@ export default function Post({ params }) {
               </div>
             )}
             {data.gallery && data.gallery.length > 0 && (
-              <div className="my-8">
+              <div className="my-8 overflow-hidden">
                 <h3 className="text-xl font-medium mb-0 mt-16">Image Gallery</h3>
-                <Carousel>
+                <Carousel opts={{
+                  loop: true,
+                }}>
                   <CarouselContent>
                     {data.gallery.map((media, index) => (
                       <CarouselItem key={index} className="md:basis-1/2">
