@@ -9,6 +9,7 @@ export async function GET(request, { params }) {
       ...,
       asset->
     },
+    body->,
     price->,
     brand->,
     material->,
@@ -16,8 +17,7 @@ export async function GET(request, { params }) {
     switchType->,
     lubeStatus->,
     categories[]->,
-    body,
-    _createdAt
+    _createdAt->
   }`
 
   try {
