@@ -2,82 +2,64 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Image from "next/image";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
-import { Component1Icon, Crosshair2Icon } from "@radix-ui/react-icons"
-
-import getAssetUrl from "@/lib/sanity/getAssetUrl"
+import Filter from "@/components/posts/Filter";
+import PostGrid from "@/components/posts/PostGrid";
+import Loader from "@/components/Loader";
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
+
   const [posts, setPosts] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [params, setParams] = useState({})
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get('/api/v1/posts');
+      const response = await axios.get('/api/v1/posts', { params });
+      setLoading(false);
+
+      if (!response) return;
+
+      const { data } = response;
+
+      if (data.success)
+        setPosts(data.posts);
+    }
+    fetchData()
+  }, [params])
+
+  useEffect(() => {
+    async function fetchBrands() {
+      const response = await axios.get('/api/v1/brands')
       if (!response) return;
 
       const { data } = response;
 
       if (!data.success) return;
 
-      setPosts(data.posts)
+      setBrands(data.brands)
     }
-
-    fetchData()
+    fetchBrands()
   }, [])
 
-  function formatDate(date) {
-    return new Date(date).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
-  }
+  // function handleFilter(filterParams) {
+  //   setLoading(true)
+  //   setParams({
+  //     brand: filterParams?.brand,
+  //     switchType: filterParams?.switchType
+  //   })
+  // }
 
   return (
-    <div className="mx-auto max-w-screen-xl px-4 my-8 md:mb-10 lg:mb-16">
+    <div className="mx-auto w-full max-w-screen-xl px-4 my-8 md:mb-10 lg:mb-16">
       <h1 className="text-lg lg:text-4xl mb-16 mt-8 font-bold tracking-wide lg:text-center">
-        Switch Reviews by Keys & Quests
+        Mechanical Switch Reviews
       </h1>
-      <div className="grid grid-cols-1 gap-y-4 gap-x-5 lg:gap-x-12 lg:gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-        {posts.length > 0 && posts?.map(({ title, brand, switchType, slug, mainImage, author, _createdAt }, idx) => (
-          <a href={"/post/" + slug.current} className="flex flex-col" key={idx}>
-            <div className="flex flex-1 flex-col overflow-hidden rounded-2xl border border-gray300 shadow-lg">
-              <div>
-                <Image alt={title} width={400} height={400} src={mainImage.asset.url} className="object-cover aspect-[16/10] w-full transition-all" />
-              </div>
-              <div className="flex flex-1 flex-col py-3 px-4 md:px-5 md:py-4 lg:px-7 lg:py-5">
-                <p className="text-xl md:text-3xl text-gray800 mb-2 md:mb-4">
-                  {title}
-                </p>
-                <div className="flex items-center justify-start gap-2 mb-4">
-                  <Badge className="uppercase text-xs tracking-wider rounded-full">
-                    {brand.name}
-                  </Badge>
-                  <Badge variant="secondary" className="uppercase text-xs tracking-wider rounded-full">
-                    <Crosshair2Icon className="me-1" />
-                    {switchType.name}
-                  </Badge>
-                </div>
-                <div className="mt-auto flex items-center">
-                  <div className="flex items-center gap-2">
-                    {author?.image && (
-                      <Avatar className="h-6 w-6">
-                        <AvatarImage src={getAssetUrl(author.image.asset).url()} />
-                        <AvatarFallback>KQ</AvatarFallback>
-                      </Avatar>
-                    )}
-                    <span className="text-xs leading-none text-gray600">{author.name}</span>
-                  </div>
-                  <div className="ml-auto pl-2 text-xs text-gray600">{formatDate(_createdAt)}</div>
-                </div>
-              </div>
-            </div>
-          </a>
-        ))}
-      </div>
+      {/* <Filter brands={brands} onFilter={handleFilter} /> */}
+      <Loader isLoading={loading}>
+        <PostGrid posts={posts} />
+      </Loader>
     </div>
   );
 }

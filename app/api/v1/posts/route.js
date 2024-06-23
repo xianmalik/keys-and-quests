@@ -1,8 +1,13 @@
 import { NextResponse } from 'next/server'
 import { client } from "@/lib/sanity/client"
 
-export async function GET() {
-  const query = `*[_type == "post"] | order(_createdAt desc) {
+export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const brand = searchParams.get('brand');
+
+  const brandQuery = brand ? ` && brand->slug.current == "${brand}"` : '';
+
+  const query = `*[_type == "post"${brandQuery}] | order(_createdAt desc) {
     ...,
     author->,
     mainImage {

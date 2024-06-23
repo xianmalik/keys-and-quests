@@ -82,3 +82,7 @@ article p {
 article h4 {
   @apply text-lg font-bold mt-4 mb-0;
 }
+
+article blockquote {
+  @apply text-xs mb-10 italic text-center;
+}
