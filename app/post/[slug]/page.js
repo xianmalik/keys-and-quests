@@ -71,35 +71,35 @@ export default function Post({ params }) {
                 <div className="flex flex-col items-start text-sm font-light mb-6 gap-1 text-gray-600">
                   {data?.brand.name && <div className="flex items-center gap-1">
                     <Component1Icon className="me-1" />
-                    Brand: {data?.brand.name}
+                    Brand: <span className="font-medium">{data?.brand.name}</span>
                   </div>}
                   {data?.switchType.name && <div className="flex items-center gap-1">
                     <Crosshair2Icon className="me-1" />
-                    Switch Type: {data?.switchType.name}
+                    Switch Type: <span className="font-medium">{data?.switchType.name}</span>
                   </div>}
                   {data?.actuation && <div className="flex items-center gap-1">
                     <CommitIcon className="me-1" />
-                    Actuation Point: {data?.actuation}±5g
+                    Actuation Point: <span className="font-medium">{data?.actuation}±5g</span>
                   </div>}
                   <div className="flex items-center gap-1">
                     <BlendingModeIcon className="me-1" />
-                    Is Factory Lubed?: {data?.lubeStatus ? 'Yes' : 'No'}
+                    Is Factory Lubed?: <span className="font-medium">{data?.lubeStatus ? 'Yes' : 'No'}</span>
                   </div>
                   {data?.material.top && <div className="flex items-center gap-1">
                     <BorderTopIcon className="me-1" />
-                    Top Housing: {data?.material.top}
+                    Top Housing: <span className="font-medium">{data?.material.top}</span>
                   </div>}
                   {data?.material.bottom && <div className="flex items-center gap-1">
                     <BorderBottomIcon className="me-1" />
-                    Bottom Housing: {data?.material.bottom}
+                    Bottom Housing: <span className="font-medium">{data?.material.bottom}</span>
                   </div>}
                   {data?.material.stem && <div className="flex items-center gap-1">
                     <AlignBottomIcon className="me-1" />
-                    Stem Material: {data?.material.stem}
+                    Stem Material: <span className="font-medium">{data?.material.stem}</span>
                   </div>}
                   {data?.price && <div className="flex items-center gap-1">
                     <ComponentBooleanIcon className="me-1" />
-                    Price: ${data?.price} per switch
+                    Price: <span className="font-medium">${data?.price}</span> per switch
                   </div>}
                 </div>
                 <div className="text-xs text-gray600">Publihsed: {formatDate(data?._createdAt)}</div>
