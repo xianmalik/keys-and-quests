@@ -7,7 +7,7 @@ import { PortableText } from '@portabletext/react'
 
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { AlignBottomIcon, BlendingModeIcon, BorderBottomIcon, BorderTopIcon, CommitIcon, Component1Icon, ComponentBooleanIcon, Crosshair2Icon } from "@radix-ui/react-icons";
+import { AlignBottomIcon, ArrowLeftIcon, ArrowRightIcon, BlendingModeIcon, BorderBottomIcon, BorderTopIcon, CommitIcon, Component1Icon, ComponentBooleanIcon, Crosshair2Icon } from "@radix-ui/react-icons";
 import Loader from "@/components/Loader";
 import {
   Carousel,
@@ -111,11 +111,8 @@ export default function Post({ params }) {
               value={data?.body}
               components={{
                 types: {
-                  image: ({ value }) => {
-                    console.log(getAssetUrl(value)); return (
-                      <Image width={600} height={400} className="aspect-[3:2] object-cover mx-auto mt-8 mb-2" src={getAssetUrl(value.asset)} alt={data?.title} />
-                    )
-                  },
+                  image: ({ value }) =>
+                    <Image width={600} height={400} className="aspect-[3:2] object-cover mx-auto mt-8 mb-2" src={getAssetUrl(value.asset)} alt={data?.title} />,
                 },
                 list: {
                   bullet: ({ children }) => <ul className="mt-2">{children}</ul>,
@@ -142,27 +139,55 @@ export default function Post({ params }) {
                 </iframe>
               </div>
             )}
-            <div className="my-8">
-              <h3 className="text-xl font-medium mb-0 mt-16">Image Gallery</h3>
-              <Carousel>
-                <CarouselContent>
-                  {data.gallery.map((media, index) => (
-                    <CarouselItem key={index} className="md:basis-1/2">
-                      <Image
-                        width={600} height={400}
-                        className="aspect-[3:2] object-cover mx-auto mt-8 mb-2 rounded-lg overflow-hidden shadow"
-                        src={getAssetUrl(media.asset)}
-                        alt={media?.alt}
-                      />
-                      <h6 className="text-sm text-center">{media?.caption}</h6>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-              </Carousel>
-            </div>
+            {data.gallery && data.gallery.length > 0 && (
+              <div className="my-8">
+                <h3 className="text-xl font-medium mb-0 mt-16">Image Gallery</h3>
+                <Carousel>
+                  <CarouselContent>
+                    {data.gallery.map((media, index) => (
+                      <CarouselItem key={index} className="md:basis-1/2">
+                        <Image
+                          width={600} height={400}
+                          className="aspect-[3:2] object-cover mx-auto mt-8 mb-2 rounded-lg overflow-hidden shadow"
+                          src={getAssetUrl(media.asset)}
+                          alt={media?.alt}
+                        />
+                        <h6 className="text-sm text-center">{media?.caption}</h6>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </Carousel>
+              </div>
+            )}
           </article>
+          <footer className="grid grid-cols-2 gap-4 max-w-screen-xl w-full mx-auto px-4 my-4">
+            <div>
+              {data.prev?.title && (
+                <a href={`/post/${data.prev.slug.current}`} className="h-full flex items-end gap-2 text-lg md:text-2xl font-medium leading-none text-gray-500 hover:text-gray-800 py-2">
+                  <ArrowLeftIcon className="h-8 w-8" />
+                  <span>
+                    <span className="text-xs md:text-sm mb-2">Previous Post</span>
+                    <br />
+                    {data.prev.title}
+                  </span>
+                </a>
+              )}
+            </div>
+            <div>
+              {data.next?.title && (
+                <a href={`/post/${data.next.slug.current}`} className="h-full flex text-end items-end justify-end gap-2 text-lg md:text-2xl font-medium leading-none text-gray-500 hover:text-gray-800 py-2">
+                  <span>
+                    <span className="text-xs md:text-sm mb-2">Next Post</span>
+                    <br />
+                    {data.next.title}
+                  </span>
+                  <ArrowRightIcon className="h-8 w-8" />
+                </a>
+              )}
+            </div>
+          </footer>
         </>
       )}
     </Loader>

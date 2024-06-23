@@ -16,7 +16,8 @@ export async function GET(request, { params }) {
     switchType->,
     lubeStatus->,
     categories[]->,
-    body
+    body,
+    _createdAt
   }`
 
   try {
@@ -24,11 +25,32 @@ export async function GET(request, { params }) {
     const post = await client.fetch(query, { slug })
 
     if (post) {
-      return NextResponse.json({ success: true, message: 'Succesfully fetched post', post })
+      const prevQuery = `*[_type == "post" && _createdAt < "${post._createdAt}"] | order(_createdAt desc)[0] {
+        slug,
+        title
+      }`
+
+      const nextQuery = `*[_type == "post" && _createdAt > "${post._createdAt}"] | order(_createdAt asc)[0] {
+        slug,
+        title
+      }`
+
+      const prev = await client.fetch(prevQuery)
+      const next = await client.fetch(nextQuery)
+
+      return NextResponse.json({
+        success: true,
+        message: 'Succesfully fetched post',
+        post: {
+          ...post,
+          prev,
+          next
+        }
+      })
     } else {
-      throw Error;
+      throw new Error('ba dum tss');
     }
   } catch (error) {
-    return NextResponse.status(500).json({ success: false, message: 'Failed to fetch data', error });
+    return NextResponse.json({ success: false, message: 'Failed to fetch data', error });
   }
 }
