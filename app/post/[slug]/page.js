@@ -22,10 +22,13 @@ import getAssetUrl from "@/lib/sanity/getAssetUrl";
 
 export default function Post({ params }) {
   const [data, setData] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true)
     async function fetchData() {
       const response = await axios.get(`/api/v1/posts/${params.slug}`);
+      setLoading(false)
       if (!response) return;
 
       const { data } = response;
@@ -39,24 +42,24 @@ export default function Post({ params }) {
   }, [params])
 
   return (
-    <Loader isLoading={!data}>
-      {!!data && (
+    <Loader isLoading={loading}>
+      {data ? (
         <>
           <div className="mx-auto max-w-screen-xl w-full px-4 my-16">
             <div className="grid grid-cols-1 md:grid-cols-3 overflow-hidden rounded-2xl border border-gray300 shadow-lg md:flex-row-reverse">
               <div className="md:order-last">
-                <Image alt={data?.title} className="w-full h-full object-cover transition-all" src={data?.mainImage.asset.url} height={280} width={280} />
+                <Image alt={data?.title} className="w-full h-full object-cover transition-all" src={data?.mainImage?.asset?.url} height={280} width={280} />
               </div>
               <div className="relative col-span-2 flex flex-col justify-center py-6 px-8 lg:px-16 lg:py-12 xl:px-24">
                 <div className="mb-2 flex flex-wrap items-center">
                   <div className="flex items-center">
                     <div className="mr-2 overflow-hidden rounded-full border border-blue500">
                       <Avatar className="h-6 w-6">
-                        <AvatarImage src={getAssetUrl(data?.author.image.asset)} />
+                        <AvatarImage src={getAssetUrl(data?.author?.image?.asset)} />
                         <AvatarFallback>KQ</AvatarFallback>
                       </Avatar>
                     </div>
-                    <span className="text-xs leading-none text-gray600">{data?.author.name}</span>
+                    <span className="text-xs leading-none text-gray600">{data?.author?.name}</span>
                   </div>
                 </div>
                 <h1 className='text-[2.5rem] font-semibold leading-none mb-4'>
@@ -69,13 +72,13 @@ export default function Post({ params }) {
                   ))}
                 </div>
                 <div className="flex flex-col items-start text-sm font-light mb-6 gap-1 text-gray-600">
-                  {data?.brand.name && <div className="flex items-center gap-1">
+                  {data?.brand?.name && <div className="flex items-center gap-1">
                     <Component1Icon className="me-1" />
-                    Brand: <span className="font-medium">{data?.brand.name}</span>
+                    Brand: <span className="font-medium">{data?.brand?.name}</span>
                   </div>}
-                  {data?.switchType.name && <div className="flex items-center gap-1">
+                  {data?.switchType?.name && <div className="flex items-center gap-1">
                     <Crosshair2Icon className="me-1" />
-                    Switch Type: <span className="font-medium">{data?.switchType.name}</span>
+                    Switch Type: <span className="font-medium">{data?.switchType?.name}</span>
                   </div>}
                   {data?.actuation && <div className="flex items-center gap-1">
                     <CommitIcon className="me-1" />
@@ -85,17 +88,17 @@ export default function Post({ params }) {
                     <BlendingModeIcon className="me-1" />
                     Is Factory Lubed?: <span className="font-medium">{data?.lubeStatus ? 'Yes' : 'No'}</span>
                   </div>
-                  {data?.material.top && <div className="flex items-center gap-1">
+                  {data?.material?.top && <div className="flex items-center gap-1">
                     <BorderTopIcon className="me-1" />
-                    Top Housing: <span className="font-medium">{data?.material.top}</span>
+                    Top Housing: <span className="font-medium">{data?.material?.top}</span>
                   </div>}
-                  {data?.material.bottom && <div className="flex items-center gap-1">
+                  {data?.material?.bottom && <div className="flex items-center gap-1">
                     <BorderBottomIcon className="me-1" />
-                    Bottom Housing: <span className="font-medium">{data?.material.bottom}</span>
+                    Bottom Housing: <span className="font-medium">{data?.material?.bottom}</span>
                   </div>}
-                  {data?.material.stem && <div className="flex items-center gap-1">
+                  {data?.material?.stem && <div className="flex items-center gap-1">
                     <AlignBottomIcon className="me-1" />
-                    Stem Material: <span className="font-medium">{data?.material.stem}</span>
+                    Stem Material: <span className="font-medium">{data?.material?.stem}</span>
                   </div>}
                   {data?.price && <div className="flex items-center gap-1">
                     <ComponentBooleanIcon className="me-1" />
@@ -191,6 +194,10 @@ export default function Post({ params }) {
             </div>
           </footer>
         </>
+      ) : (
+        <p className="text-center my-auto text-2xl font-semibold tracking-wide">
+          404: Post not found
+        </p>
       )}
     </Loader>
   )

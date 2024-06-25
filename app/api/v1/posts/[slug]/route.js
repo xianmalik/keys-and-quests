@@ -24,7 +24,7 @@ export async function GET(request, { params }) {
     const { slug } = params;
     const post = await client.fetch(query, { slug })
 
-    if (post) {
+    if (post._id) {
       const prevQuery = `*[_type == "post" && _createdAt < "${post._createdAt}"] | order(_createdAt desc)[0] {
         slug,
         title
