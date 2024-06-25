@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server'
 import { client } from "@/lib/sanity/client"
 
 export async function GET(request) {
@@ -23,11 +22,11 @@ export async function GET(request) {
   try {
     const posts = await client.fetch(query)
     if (posts) {
-      return NextResponse.json({ success: true, message: 'Succesfully fetched posts', posts })
+      return Response.json({ success: true, message: 'Succesfully fetched posts', posts })
     } else {
       throw Error;
     }
   } catch (error) {
-    return NextResponse.status(500).json({ success: false, message: 'Failed to fetch data', error });
+    return Response.status(500).json({ success: false, message: 'Failed to fetch data', error });
   }
 }

@@ -29,6 +29,7 @@ export default function Post({ params }) {
     async function fetchData() {
       const response = await axios.get(`/api/v1/posts/${params.slug}`);
       setLoading(false)
+      console.log({ response });
       if (!response) return;
 
       const { data } = response;
