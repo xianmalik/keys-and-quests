@@ -1,10 +1,11 @@
 'use client'
 
 import Link from "next/link";
-import { DiscordLogoIcon, GitHubLogoIcon, NotionLogoIcon } from "@radix-ui/react-icons";
-import { DiscordIcon, FacebookIcon } from '@/lib/icons'
+
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+
+import Socials from "./Socials";
 
 const navigation = [
   { path: '/', title: 'Reviews' },
@@ -33,34 +34,8 @@ export default function Header() {
               ))}
             </ul>
           </div>
-          <div>
-            <ul className="flex items-center justify-end gap-2 md:gap-4 px-2">
-              <li>
-                <Link href="https://discord.gg/d3sv6wg6gK" target="_blank">
-                  <DiscordIcon />
-                </Link>
-              </li>
-              <li>
-                <Link href="/" target="_blank">
-                  <GitHubLogoIcon />
-                </Link>
-              </li>
-              <li>
-                <Link href="/">
-                  <NotionLogoIcon />
-                </Link>
-              </li>
-              {/* <li>
-                <Link href="/">
-                  <YoutubeIcon size={15} strokeWidth={1} />
-                </Link>
-              </li>
-              <li>
-                <Link href="/">
-                  <LucideFacebook size={15} strokeWidth={1} fill="#000000" />
-                </Link>
-              </li> */}
-            </ul>
+          <div className="hidden md:block">
+            <Socials />
           </div>
         </div>
       </div>
