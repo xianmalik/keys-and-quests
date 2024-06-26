@@ -16,8 +16,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import CommentForm from "@/components/posts/CommentForm"
-import CommentView from "@/components/posts/CommentView"
 
 import { cn } from "@/lib/utils";
 import getAssetUrl from "@/lib/sanity/getAssetUrl";

@@ -16,14 +16,7 @@ export async function GET(request, { params }) {
     switchType->,
     lubeStatus->,
     categories[]->,
-    _createdAt->,
-    "comments": *[_type == "comment" && post._ref == ^._id && approved == true] | order(_createdAt desc) {
-      _id,
-      name,
-      email,
-      message,
-      _createdAt
-    }
+    _createdAt->
   }`
 
   try {
