@@ -17,17 +17,23 @@ export default function PostGrid({ posts }) {
   }
   return (
     <div className="grid grid-cols-1 gap-4 lg:gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {posts?.map(({ title, brand, switchType, slug, mainImage, author, _createdAt }, idx) => (
+      {posts?.map(({ title, tag, brand, switchType, slug, mainImage, _createdAt }, idx) => (
         <a href={"/post/" + slug.current} className="flex flex-col" key={idx}>
           <div className="flex flex-1 flex-col overflow-hidden rounded-2xl border border-gray300 shadow-lg">
             <div>
               <Image alt={title} width={400} height={400} src={mainImage.asset.url} className="object-cover aspect-[16/10] w-full transition-all" />
             </div>
             <div className="flex flex-1 flex-col py-3 px-4 md:px-5 md:py-4 lg:px-7 lg:py-5">
-              <p className="text-xl md:text-2xl text-gray-800 mb-2 md:mb-4">
+              <div className="mt-auto flex items-center mb-1">
+                <div className="text-xs text-gray600">{formatDate(_createdAt)}</div>
+              </div>
+              <h4 className="text-xl md:text-2xl text-gray-800 mb-2">
                 {title}
+              </h4>
+              <p className="mb-2 md:mb-4 text-gray-600 text-base">
+                {!!tag && `${tag}`}
               </p>
-              <div className="flex items-center justify-start gap-2 mb-4">
+              <div className="flex items-center justify-start gap-2 mb-2">
                 <Badge className="uppercase text-xs tracking-wider rounded-full">
                   {brand.name}
                 </Badge>
@@ -35,18 +41,6 @@ export default function PostGrid({ posts }) {
                   <Crosshair2Icon className="me-1" />
                   {switchType.name}
                 </Badge>
-              </div>
-              <div className="mt-auto flex items-center">
-                <div className="flex items-center gap-2">
-                  {author?.image && (
-                    <Avatar className="h-6 w-6">
-                      <AvatarImage src={getAssetUrl(author.image.asset)} />
-                      <AvatarFallback>KQ</AvatarFallback>
-                    </Avatar>
-                  )}
-                  <span className="text-xs leading-none text-gray600">{author.name}</span>
-                </div>
-                <div className="ml-auto pl-2 text-xs text-gray600">{formatDate(_createdAt)}</div>
               </div>
             </div>
           </div>

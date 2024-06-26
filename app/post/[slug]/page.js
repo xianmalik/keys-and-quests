@@ -29,7 +29,7 @@ export default function Post({ params }) {
     async function fetchData() {
       const response = await axios.get(`/api/v1/posts/${params.slug}`);
       setLoading(false)
-      console.log({ response });
+
       if (!response) return;
 
       const { data } = response;
@@ -52,27 +52,16 @@ export default function Post({ params }) {
                 <Image alt={data?.title} className="w-full h-full object-cover transition-all" src={data?.mainImage?.asset?.url} height={280} width={280} />
               </div>
               <div className="relative col-span-2 flex flex-col justify-center py-6 px-8 lg:px-16 lg:py-12 xl:px-24">
-                <div className="mb-2 flex flex-wrap items-center">
-                  <div className="flex items-center">
-                    <div className="mr-2 overflow-hidden rounded-full border border-blue500">
-                      <Avatar className="h-6 w-6">
-                        <AvatarImage src={getAssetUrl(data?.author?.image?.asset)} />
-                        <AvatarFallback>KQ</AvatarFallback>
-                      </Avatar>
-                    </div>
-                    <span className="text-xs leading-none text-gray600">{data?.author?.name}</span>
-                  </div>
-                </div>
-                <h1 className='text-[2.5rem] font-semibold leading-none mb-4'>
-                  {data?.title}
-                  {!!data?.tag && ` | ${data?.tag}`}
-                </h1>
-                <div className="flex items-center gap-2 font-light mb-8">
+                <div className="flex items-center gap-2 font-light mb-2 md:mb-4">
                   {data?.categories?.map(({ _id, title }) => (
                     <Badge className="tracking-wider rounded-full" key={_id}>{title}</Badge>
                   ))}
                 </div>
-                <div className="flex flex-col items-start text-sm font-light mb-6 gap-1 text-gray-600">
+                <h1 className='text-[2.5rem] font-semibold leading-none mb-4 md:mb-8'>
+                  {data?.title}
+                  {!!data?.tag && ` | ${data?.tag}`}
+                </h1>
+                <div className="flex flex-col items-start text-sm font-light mb-4 md:mb-8 gap-1 text-gray-600">
                   {data?.brand?.name && <div className="flex items-center gap-1">
                     <Component1Icon className="me-1" />
                     Brand: <span className="font-medium">{data?.brand?.name}</span>
@@ -106,7 +95,7 @@ export default function Post({ params }) {
                     Price: <span className="font-medium">${data?.price}</span> per switch
                   </div>}
                 </div>
-                <div className="text-xs text-gray600">Publihsed: {formatDate(data?._createdAt)}</div>
+                <div className="text-xs text-gray600">Published: {formatDate(data?._createdAt)}</div>
               </div>
             </div>
           </div>
