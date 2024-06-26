@@ -15,8 +15,7 @@ export async function GET(request) {
     },
     brand->,
     switchType->,
-    categories[]->,
-    body
+    categories[]->
   }`
 
   try {

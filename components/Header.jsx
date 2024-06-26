@@ -21,12 +21,12 @@ export default function Header() {
           <div>
             <ul className="flex items-center justify-end gap-2 md:gap-4 px-2">
               <li>
-                <Link href="/">
+                <Link href="https://discord.gg/d3sv6wg6gK" target="_blank">
                   <DiscordLogoIcon />
                 </Link>
               </li>
-              <li>
-                <Link href="/">
+              {/* <li>
+                <Link href="/" target="_blank">
                   <GitHubLogoIcon />
                 </Link>
               </li>
@@ -44,7 +44,7 @@ export default function Header() {
                 <Link href="/">
                   <LucideFacebook size={15} strokeWidth={1} fill="#000000" />
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

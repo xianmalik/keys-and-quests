@@ -16,7 +16,14 @@ export async function GET(request, { params }) {
     switchType->,
     lubeStatus->,
     categories[]->,
-    _createdAt->
+    _createdAt->,
+    "comments": *[_type == "comment" && post._ref == ^._id && approved == true] | order(_createdAt desc) {
+      _id,
+      name,
+      email,
+      message,
+      _createdAt
+    }
   }`
 
   try {
@@ -53,3 +60,5 @@ export async function GET(request, { params }) {
     return Response.json({ success: false, message: 'Failed to fetch data', error });
   }
 }
+
+export const dynamic = 'error'

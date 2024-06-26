@@ -1,14 +1,15 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import axios from "axios";
 import Image from "next/image";
 import { PortableText } from '@portabletext/react'
 
-import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+// Icons
 import { AlignBottomIcon, ArrowLeftIcon, ArrowRightIcon, BlendingModeIcon, BorderBottomIcon, BorderTopIcon, CommitIcon, Component1Icon, ComponentBooleanIcon, Crosshair2Icon } from "@radix-ui/react-icons";
+
+// Components
 import Loader from "@/components/Loader";
+import { Badge } from '@/components/ui/badge';
 import {
   Carousel,
   CarouselContent,
@@ -16,9 +17,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import CommentForm from "@/components/posts/CommentForm"
+import CommentView from "@/components/posts/CommentView"
 
 import { cn, formatDate } from "@/lib/utils";
 import getAssetUrl from "@/lib/sanity/getAssetUrl";
+
+import apiClient from "@/lib/apiClient";
 
 export default function Post({ params }) {
   const [data, setData] = useState();
@@ -27,7 +32,7 @@ export default function Post({ params }) {
   useEffect(() => {
     setLoading(true)
     async function fetchData() {
-      const response = await axios.get(`/api/v1/posts/${params.slug}`);
+      const response = await apiClient.get(`/posts/${params.slug}`);
       setLoading(false)
 
       if (!response) return;
@@ -157,6 +162,16 @@ export default function Post({ params }) {
               </div>
             )}
           </article>
+
+          {/* Commenting */}
+          <div className='mx-auto max-w-4xl w-full my-16 px-4'>
+            <div className="my-8">
+              <h3 className="text-xl font-medium mb-4 mt-16">Comments</h3>
+            </div>
+            <CommentView comments={data.comments} />
+            <CommentForm postId={data._id} />
+          </div>
+
           <footer className="grid grid-cols-2 gap-4 max-w-screen-xl w-full mx-auto px-4 my-4">
             <div>
               {data.prev?.title && (
