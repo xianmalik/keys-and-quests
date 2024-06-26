@@ -6,6 +6,7 @@ import axios from "axios";
 import Filter from "@/components/posts/Filter";
 import PostGrid from "@/components/posts/PostGrid";
 import Loader from "@/components/Loader";
+import generateRssFeed from "@/lib/rss";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -23,8 +24,10 @@ export default function Home() {
 
       const { data } = response;
 
-      if (data.success)
+      if (data.success) {
         setPosts(data.posts);
+        generateRssFeed(data.posts);
+      }
     }
     fetchData()
   }, [params])
