@@ -24,6 +24,7 @@ import getAssetUrl from "@/lib/sanity/getAssetUrl";
 
 import apiClient from "@/lib/apiClient";
 import PostHeader from "@/components/posts/PostHeader";
+import DisqusComments from "@/components/posts/DisqusComments";
 
 export default function Post({ params }) {
   const [data, setData] = useState();
@@ -116,8 +117,11 @@ export default function Post({ params }) {
             <div className="my-8">
               <h3 className="text-xl font-medium mb-4 mt-16">Comments</h3>
             </div>
-            <CommentView comments={data.comments} />
-            <CommentForm postId={data._id} />
+            <DisqusComments
+              url={`https://keysandquests.com/posts/` + data.slug.current}
+              identifier={data._id}
+              title={data.title}
+            />
           </div>
 
           <footer className="grid grid-cols-2 gap-4 max-w-screen-xl w-full mx-auto px-4 my-4">

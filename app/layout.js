@@ -1,3 +1,4 @@
+import React from "react";
 import { Urbanist as Sans } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -12,16 +13,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={sans.className}>
-        <main className="flex flex-col min-h-screen">
-          <Header />
-          <div className="flex-1 flex flex-col">
-            {children}
-          </div>
-          <Footer />
-        </main>
-      </body>
-    </html>
+    <React.StrictMode>
+      <html lang="en">
+        <body className={sans.className}>
+          <main className="flex flex-col min-h-screen">
+            <Header />
+            <div className="flex-1 flex flex-col">
+              {children}
+            </div>
+            <Footer />
+          </main>
+        </body>
+      </html>
+    </React.StrictMode>
   );
 }
