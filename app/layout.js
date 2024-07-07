@@ -31,7 +31,10 @@ export default function RootLayout({ children }) {
           }} />
         <body className={sans.className}>
           <noscript>
-            <iframe src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_GTM_ID}`} height="0" width="0" style="display:none;visibility:hidden"></iframe>
+            <iframe
+              height="0" width="0"
+              src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_GTM_ID}`}
+              style={{ display: 'none', visibility: 'hidden' }}></iframe>
           </noscript>
           <main className="flex flex-col min-h-screen">
             <Header />
