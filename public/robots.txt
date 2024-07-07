@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://keysandquests.com
+
+# Sitemaps
+Sitemap: https://keysandquests.com/sitemap.xml

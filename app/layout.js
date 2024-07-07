@@ -1,10 +1,12 @@
 import React from "react";
+
+import Script from "next/script";
 import { Urbanist as Sans } from "next/font/google";
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
 import "./globals.css";
-import Head from "next/head";
-import Script from "next/script";
 
 const sans = Sans({ subsets: ["latin"] });
 
