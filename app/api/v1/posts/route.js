@@ -6,7 +6,7 @@ export async function GET(request) {
 
   const brandQuery = brand ? ` && brand->slug.current == "${brand}"` : '';
 
-  const query = `*[_type == "post"${brandQuery}] | order(_createdAt desc) {
+  const query = `*[_type == "post"${brandQuery} && isPublished == true] | order(_createdAt desc) {
     ...,
     mainImage {
       ...,
@@ -19,12 +19,15 @@ export async function GET(request) {
 
   try {
     const posts = await client.fetch(query)
+    console.log({ posts })
     if (posts) {
       return Response.json({ success: true, message: 'Succesfully fetched posts', posts })
     } else {
-      throw Error;
+      throw new Error('No posts found');
     }
   } catch (error) {
-    return Response.status(500).json({ success: false, message: 'Failed to fetch data', error });
+    return Response.json({ success: false, message: 'Failed to fetch data', error: error.message });
   }
 }
+
+export const dynamicParams = false

@@ -20,6 +20,6 @@ export async function GET() {
       throw Error;
     }
   } catch (error) {
-    return NextResponse.status(500).json({ success: false, message: 'Failed to fetch data', error });
+    return NextResponse.json({ success: false, message: 'Failed to fetch data', error });
   }
 }
