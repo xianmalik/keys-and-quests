@@ -3,7 +3,6 @@ import { client } from '@/lib/sanity/client';
 export async function GET(request, { params }) {
   const query = `*[_type == "post" && slug.current == $slug][0] {
     ...,
-    author->,
     mainImage {
       ...,
       asset->

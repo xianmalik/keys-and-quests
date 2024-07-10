@@ -8,7 +8,6 @@ export async function GET(request) {
 
   const query = `*[_type == "post"${brandQuery}] | order(_createdAt desc) {
     ...,
-    author->,
     mainImage {
       ...,
       asset->

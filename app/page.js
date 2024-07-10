@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import Filter from "@/components/posts/Filter";
+// import Filter from "@/components/posts/Filter";
 import PostGrid from "@/components/posts/PostGrid";
 import Loader from "@/components/Loader";
 import generateRssFeed from "@/lib/rss";
@@ -11,8 +11,8 @@ import generateRssFeed from "@/lib/rss";
 export default function Home() {
   const [loading, setLoading] = useState(true);
 
-  const [posts, setPosts] = useState([]);
-  const [brands, setBrands] = useState([]);
+  const [posts, setPosts] = useState([])
+  const [brands, setBrands] = useState([])
   const [params, setParams] = useState({})
 
   useEffect(() => {
