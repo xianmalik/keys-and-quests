@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Crosshair2Icon } from "@radix-ui/react-icons"
 
@@ -9,17 +8,20 @@ import { formatDate } from "@/lib/utils";
 import { Fragment } from "react";
 
 export default function PostGrid({ posts }) {
-  console.log({ posts });
+
   if (posts.length <= 0) {
     return (
-      <p className="font-medium text-lg">
+      <p className="font-medium text-lg text-center">
         No reviews found! Please reload or check back later!
       </p>
     )
   }
+
   return (
     <div className="grid grid-cols-1 gap-4 lg:gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {posts?.map(({ title, tag, brand, switchType, slug, mainImage, _createdAt }, idx) => (title && slug && mainImage) ? (
+      {posts?.map(({
+        title, tag, brand, switchType, slug, mainImage, _createdAt
+      }, idx) => (title && slug && mainImage) ? (
         <a href={"/post/" + slug.current} className="flex flex-col" key={idx}>
           <div className="flex flex-1 flex-col overflow-hidden rounded-2xl border border-gray300 shadow-lg">
             {mainImage?.asset?.url && <div>
