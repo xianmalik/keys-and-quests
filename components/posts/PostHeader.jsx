@@ -32,9 +32,9 @@ export default function PostHeader({ data }) {
               <Component1Icon className="me-1" />
               Brand: <span className="font-medium">{data?.brand?.name}</span>
             </div>}
-            {data?.switchType?.name && <div className="flex items-center gap-1">
+            {data?.switchType && <div className="flex items-center gap-1">
               <Crosshair2Icon className="me-1" />
-              Switch Type: <span className="font-medium">{data?.switchType?.name}</span>
+              Switch Type: <span className="font-medium">{data?.switchType}</span>
             </div>}
             {data?.actuation && <div className="flex items-center gap-1">
               <CommitIcon className="me-1" />

@@ -41,7 +41,7 @@ export default function PostGrid({ posts }) {
                 </Badge>}
                 {switchType && <Badge variant="secondary" className="uppercase text-xs tracking-wider rounded-full">
                   <Crosshair2Icon className="me-1" />
-                  {switchType.name}
+                  {switchType}
                 </Badge>}
               </div>
             </div>
