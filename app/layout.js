@@ -1,18 +1,21 @@
 import React from "react";
 
 import Script from "next/script";
-import { Urbanist as Sans } from "next/font/google";
+import { Poppins as Sans } from "next/font/google";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 import "./globals.css";
 
-const sans = Sans({ subsets: ["latin"] });
+const sans = Sans({
+  subsets: [ 'latin' ],
+  weight: [ '100', '200', '300', '400', '500', '600', '700', '800', '900' ],
+});
 
 export const metadata = {
   title: "Keys & Quests",
-  description: "Switch Reviews, Mechanical Keyboards & More...",
+  description: "Mechanical Keyboards, Switch Reviews & More...",
 };
 
 export default function RootLayout({ children }) {
