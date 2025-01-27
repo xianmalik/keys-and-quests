@@ -1,7 +1,7 @@
 import { DiscussionEmbed } from 'disqus-react';
 
 const DisqusComments = ({ url, identifier, title }) => {
-  const disqusShortname = 'keysandquests'; // Replace with your Disqus shortname
+  const disqusShortname = 'keysandquests';
   const disqusConfig = {
     url: url,
     identifier: identifier,

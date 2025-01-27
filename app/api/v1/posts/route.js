@@ -19,7 +19,7 @@ export async function GET(request) {
 
   try {
     const posts = await client.fetch(query)
-    console.log({ posts })
+
     if (posts) {
       return Response.json({ success: true, message: 'Succesfully fetched posts', posts })
     } else {

@@ -9,10 +9,15 @@
             <link>http://localhost:3000</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 10 Jul 2024 11:55:33 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 14 Jul 2024 11:12:25 GMT</lastBuildDate>
         <atom:link href="http://localhost:3000/rss.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 10 Jul 2024 11:55:33 GMT</pubDate>
+        <pubDate>Sun, 14 Jul 2024 11:12:25 GMT</pubDate>
         <copyright><![CDATA[All rights reserved! 2024]]></copyright>
+        <item>
+            <title><![CDATA[Moyu Betty]]></title>
+            <link>http://localhost:3000/posts/moyu-betty</link>
+            <guid isPermaLink="true">http://localhost:3000/posts/moyu-betty</guid>
+        </item>
         <item>
             <title><![CDATA[Haimu x Geon White]]></title>
             <link>http://localhost:3000/posts/haimu-geon-white</link>
