@@ -76,7 +76,12 @@
 }
 
 article p {
-  @apply mb-4;
+  @apply mb-4 font-light;
+}
+
+article b,
+article strong {
+  @apply font-medium;
 }
 
 article h4 {

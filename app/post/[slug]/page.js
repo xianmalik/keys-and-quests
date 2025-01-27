@@ -23,6 +23,7 @@ import getAssetUrl from "@/lib/sanity/getAssetUrl";
 import apiClient from "@/lib/apiClient";
 import PostHeader from "@/components/posts/PostHeader";
 import DisqusComments from "@/components/posts/DisqusComments";
+import {ImageModal} from "@/components/ImageModal";
 
 export default function Post({ params }) {
   const [data, setData] = useState();
@@ -57,7 +58,7 @@ export default function Post({ params }) {
               components={{
                 types: {
                   image: ({ value }) =>
-                    <Image width={600} height={400} className="aspect-[3:2] object-cover mx-auto mt-8 mb-2" src={getAssetUrl(value.asset)} alt={data?.title} />,
+                    <ImageModal width={600} height={400} className="aspect-[3:2] object-cover mx-auto mt-8 mb-2" src={getAssetUrl(value.asset)} alt={data?.title} />,
                 },
                 list: {
                   bullet: ({ children }) => <ul className="mt-2">{children}</ul>,
