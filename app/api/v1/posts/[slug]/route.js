@@ -22,6 +22,16 @@ export async function GET(request, { params }) {
     const { slug } = params;
     const post = await client.fetch(query, { slug })
 
+    const { Client } = require('@notionhq/client');
+
+    const notion = new Client({ auth: process.env.NOTION_API_KEY });
+
+    (async () => {
+      const databaseId = '668d797c-76fa-4934-9b05-ad288df2d136';
+      const response = await notion.databases.retrieve({ database_id: databaseId });
+      console.log(response);
+    })();
+
     if (!post._id) {
       return Response.json({ success: false, message: '404: Post Not Found!', error });
     }
