@@ -1,3 +1,4 @@
+import { notionClient } from '@/lib/notionClient';
 import { client } from '@/lib/sanity/client';
 
 export async function GET(request, { params }) {
@@ -22,15 +23,15 @@ export async function GET(request, { params }) {
     const { slug } = params;
     const post = await client.fetch(query, { slug })
 
-    const { Client } = require('@notionhq/client');
-
-    const notion = new Client({ auth: process.env.NOTION_API_KEY });
-
-    (async () => {
-      const databaseId = '668d797c-76fa-4934-9b05-ad288df2d136';
-      const response = await notion.databases.retrieve({ database_id: databaseId });
-      console.log(response);
-    })();
+    const notionResponse = await notionClient.databases.query({
+      database_id: 'f8ecd71b58264356b33b207ebf9a69e5',
+      filter: {
+        property: 'ID',
+        unique_id: {
+          equals: 141
+        }
+      }
+    });
 
     if (!post._id) {
       return Response.json({ success: false, message: '404: Post Not Found!', error });
@@ -54,6 +55,7 @@ export async function GET(request, { params }) {
       message: 'Succesfully fetched post',
       post: {
         ...post,
+        properties: notionResponse?.results?.[0]?.properties,
         prev,
         next
       }

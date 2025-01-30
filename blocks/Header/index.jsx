@@ -5,7 +5,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
-import Socials from "./Socials";
+import Socials from "@/components/Socials";
 
 const navigation = [
   { path: '/', title: 'Reviews' },

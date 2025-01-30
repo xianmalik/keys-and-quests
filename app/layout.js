@@ -3,11 +3,12 @@ import React from "react";
 import Script from "next/script";
 import { Poppins as Sans } from "next/font/google";
 
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/blocks/Header";
+import Footer from "@/blocks/Footer";
+
+import Maintenance from "@/components/Maintenance";
 
 import "./globals.css";
-import Maintenance from "@/components/Maintenance";
 
 const sans = Sans({
   subsets: [ 'latin' ],
