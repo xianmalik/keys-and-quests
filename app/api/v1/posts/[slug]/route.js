@@ -1,3 +1,4 @@
+import { mutateProperties } from '@/lib/dataMutator';
 import { notionClient } from '@/lib/notionClient';
 import { client } from '@/lib/sanity/client';
 
@@ -8,14 +9,9 @@ export async function GET(request, { params }) {
       ...,
       asset->
     },
+    notion_item_id,
     body->,
     price->,
-    brand->,
-    material->,
-    actuation->,
-    switchType->,
-    lubeStatus->,
-    categories[]->,
     _createdAt->
   }`
 
@@ -28,10 +24,12 @@ export async function GET(request, { params }) {
       filter: {
         property: 'ID',
         unique_id: {
-          equals: 141
+          equals: post.notion_item_id
         }
       }
     });
+
+    const properties = mutateProperties(notionResponse?.results?.[0]?.properties);
 
     if (!post._id) {
       return Response.json({ success: false, message: '404: Post Not Found!', error });
@@ -55,7 +53,7 @@ export async function GET(request, { params }) {
       message: 'Succesfully fetched post',
       post: {
         ...post,
-        properties: notionResponse?.results?.[0]?.properties,
+        properties,
         prev,
         next
       }

@@ -20,7 +20,7 @@ export default function PostGrid({ posts }) {
   return (
     <div className="grid grid-cols-1 gap-4 lg:gap-6 md:grid-cols-2 lg:grid-cols-3">
       {posts?.map(({
-        title, tag, brand, switchType, slug, mainImage, _createdAt
+        title, tag, properties, slug, mainImage, _createdAt
       }, idx) => (title && slug && mainImage) ? (
         <a href={"/post/" + slug.current} className="flex flex-col" key={idx}>
           <div className="flex flex-1 flex-col overflow-hidden rounded-2xl border border-gray300 shadow-lg">
@@ -38,13 +38,13 @@ export default function PostGrid({ posts }) {
                 {tag}
               </p>}
               <div className="flex items-center justify-start gap-2 mb-2">
-                {brand && <Badge className="uppercase text-xs tracking-wider rounded-full">
-                  {brand.name}
-                </Badge>}
-                {switchType && <Badge variant="secondary" className="uppercase text-xs tracking-wider rounded-full">
+                  <Badge className="uppercase text-xs tracking-wider rounded-full">
+                    {properties.brandName[0]}
+                  </Badge>
+                  <Badge variant="secondary" className="uppercase text-xs tracking-wider rounded-full">
                   <Crosshair2Icon className="me-1" />
-                  {switchType}
-                </Badge>}
+                    {properties.switchType}
+                  </Badge>
               </div>
             </div>
           </div>

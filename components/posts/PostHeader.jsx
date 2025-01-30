@@ -5,7 +5,6 @@ import { AlignBottomIcon, BlendingModeIcon, BorderBottomIcon, BorderTopIcon, Com
 import { Badge } from '@/components/ui/badge';
 
 import { formatDate } from "@/lib/utils";
-import { getActuation, getBottomHousing, getBrandName, getLubeStatus, getStemMaterial, getSwitchType, getTopHousing } from "@/lib/properties";
 
 export default function PostHeader({ data }) {
   if (!data) {
@@ -30,31 +29,31 @@ export default function PostHeader({ data }) {
           </h1>
           <div className="flex flex-col items-start text-sm font-light mb-4 md:mb-8 gap-1 text-gray-600">
             <div className="flex items-center gap-1">
-              <Component1Icon className="me-1" />Brand: <span className="font-medium">{getBrandName(data?.properties)}</span>
+              <Component1Icon className="me-1" />Brand: <span className="font-medium">{data?.properties?.brandName[0]}</span>
             </div>
             <div className="flex items-center gap-1">
               <Crosshair2Icon className="me-1" />
-              Switch Type: <span className="font-medium">{getSwitchType(data?.properties)}</span>
+              Switch Type: <span className="font-medium">{data?.properties?.switchType}</span>
             </div>
             <div className="flex items-center gap-1">
               <CommitIcon className="me-1" />
-              Actuation Point: <span className="font-medium">{getActuation(data?.properties)}±5g</span>
+              Actuation Point: <span className="font-medium">{data?.properties?.actuation}±5g</span>
             </div>
             <div className="flex items-center gap-1">
               <BlendingModeIcon className="me-1" />
-              Lube Status: <span className="font-medium">{getLubeStatus(data?.properties)}</span>
+              Lube Status: <span className="font-medium">{data?.properties?.lubeStatus}</span>
             </div>
             <div className="flex items-center gap-1">
               <BorderTopIcon className="me-1" />
-              Top Housing: <span className="font-medium">{getTopHousing(data?.properties)}</span>
+              Top Housing: <span className="font-medium">{data?.properties?.topHousing}</span>
             </div>
             <div className="flex items-center gap-1">
               <BorderBottomIcon className="me-1" />
-              Bottom Housing: <span className="font-medium">{getBottomHousing(data?.properties)}</span>
+              Bottom Housing: <span className="font-medium">{data?.properties?.bottomHousing}</span>
             </div>
             <div className="flex items-center gap-1">
               <AlignBottomIcon className="me-1" />
-              Stem Material: <span className="font-medium">{getStemMaterial(data?.properties)}</span>
+              Stem Material: <span className="font-medium">{data?.properties?.stemMaterial}</span>
             </div>
             {data?.price && <div className="flex items-center gap-1">
               <ComponentBooleanIcon className="me-1" />
