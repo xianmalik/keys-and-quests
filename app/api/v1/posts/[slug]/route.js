@@ -24,7 +24,7 @@ export async function GET(request, { params }) {
     const post = await client.fetch(query, { slug })
 
     const notionResponse = await notionClient.databases.query({
-      database_id: 'f8ecd71b58264356b33b207ebf9a69e5',
+      database_id: process.env.NOTION_DB,
       filter: {
         property: 'ID',
         unique_id: {
