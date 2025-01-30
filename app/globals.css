@@ -91,3 +91,25 @@ article h4 {
 article blockquote {
   @apply text-xs mb-10 italic text-center;
 }
+
+/* page bg */
+body {
+  background-image: url('/images/main-bg.png');
+}
+
+/* Header Styles */
+.masthead .navbar-item {
+  @apply font-medium uppercase tracking-[2px];
+  @apply border-2 border-transparent bg-transparent;
+  @apply transition-all relative;
+  box-shadow: transparent 0 0 0 0;
+}
+.masthead .navbar-item a {
+  @apply px-6 py-2 inline-block;
+}
+
+.masthead .navbar-item:hover,
+.masthead .navbar-item.active {
+  @apply border-[#222] bg-yellow-200;
+  box-shadow: #222 4px 4px 0 0;
+}

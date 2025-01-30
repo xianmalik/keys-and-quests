@@ -18,13 +18,13 @@ export default function PostGrid({ posts }) {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 lg:gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 lg:gap-10 md:grid-cols-2 lg:grid-cols-3">
       {posts?.map(({
         title, tag, brand, switchType, slug, mainImage, _createdAt
       }, idx) => (title && slug && mainImage) ? (
         <a href={"/post/" + slug.current} className="flex flex-col" key={idx}>
-          <div className="flex flex-1 flex-col overflow-hidden rounded-2xl border border-gray300 shadow-lg">
-            {mainImage?.asset?.url && <div>
+            <div className="transition-all flex flex-1 flex-col overflow-hidden border-2 border-black bg-white hover:shadow-retro shadow-none">
+              {mainImage?.asset?.url && <div className="shadow-md">
               <Image alt={title} width={400} height={400} src={getAssetUrl(mainImage.asset.url)} className="object-cover aspect-[16/10] w-full transition-all" />
             </div>}
             <div className="flex flex-1 flex-col py-3 px-4 md:px-5 md:py-4 lg:px-7 lg:py-5">
