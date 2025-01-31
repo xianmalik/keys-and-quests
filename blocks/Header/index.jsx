@@ -1,11 +1,13 @@
 'use client'
 
 import Link from "next/link";
+import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
 import Socials from "@/components/Socials";
+import SearchButton from "@/components/SearchButton";
 
 const navigation = [
   { path: '/', title: 'Reviews' },
@@ -26,11 +28,11 @@ export default function Header() {
   }
 
   return (
-    <header className="masthead bg-cream py-8 border-b-4 border-black">
+    <header className="masthead bg-cream py-5 border-b-4 border-black">
       <div className='max-w-screen-xl mx-auto px-4'>
         <div className="flex justify-between items-center">
           <a href="/" className="text-xl font-bold tracking-widest uppercase">
-            Keys & Quests
+            <Image height="35" width="172" src='/KNQ_main_logo.svg' alt='KNQ Logo' />
           </a>
           <div className="ms-8 mb-1 me-auto text-sm font-light tracking-wider">
             <ul className="flex items-center justify-end gap-2 md:gap-6 px-2">
@@ -44,9 +46,7 @@ export default function Header() {
               ))}
             </ul>
           </div>
-          <div className="hidden md:block">
-            <Socials />
-          </div>
+          <SearchButton />
         </div>
       </div>
     </header>
