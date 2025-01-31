@@ -115,13 +115,12 @@ body {
 }
 
 .masthead .search-btn {
-  @apply h-9 w-9 text-[#222];
-  @apply grid place-items-center ms-4;
+  @apply h-10 w-10 text-[#222];
+  @apply grid place-items-center ms-4 mb-1;
   @apply border-2  border-[#222] bg-green-200;
   @apply transition-all relative cursor-pointer;
   box-shadow: #222 4px 4px 0 0;
 }
-
 
 .masthead .search-btn:hover {
   box-shadow: transparent 0 0 0 0;

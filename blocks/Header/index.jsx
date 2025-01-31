@@ -30,12 +30,9 @@ export default function Header() {
   return (
     <header className="masthead bg-cream py-5 border-b-4 border-black">
       <div className='max-w-screen-xl mx-auto px-4'>
-        <div className="flex justify-between items-center">
-          <a href="/" className="text-xl font-bold tracking-widest uppercase">
-            <Image height="35" width="172" src='/KNQ_main_logo.svg' alt='KNQ Logo' />
-          </a>
-          <div className="ms-8 mb-1 me-auto text-sm font-light tracking-wider">
-            <ul className="flex items-center justify-end gap-2 md:gap-6 px-2">
+        <div className="grid grid-cols-3 items-center">
+          <div className="mb-1 text-sm font-light tracking-wider">
+            <ul className="flex items-center justify-start gap-2 md:gap-6 px-2">
               {navigation.map(({ path, title }) => (
                 <li key={path} className={cn(
                   "navbar-item",
@@ -46,7 +43,12 @@ export default function Header() {
               ))}
             </ul>
           </div>
-          <SearchButton />
+          <a href="/" className="text-xl font-bold tracking-widest uppercase mx-auto">
+            <Image height="35" width="172" src='/KNQ_main_logo.svg' alt='KNQ Logo' />
+          </a>
+          <div className="flex justify-end">
+            <SearchButton />
+          </div>
         </div>
       </div>
     </header>
