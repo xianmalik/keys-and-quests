@@ -8,10 +8,12 @@ import { usePathname } from "next/navigation";
 
 import Socials from "@/components/Socials";
 import SearchButton from "@/components/SearchButton";
+import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 
 const navigation = [
   { path: '/', title: 'Reviews' },
-  { path: '/faq', title: 'FAQs' },
+  { path: '#', title: 'About' },
+  { path: '#', title: 'Shorts' },
 ]
 
 
@@ -31,8 +33,13 @@ export default function Header() {
     <header className="masthead bg-cream py-5 border-b-4 border-black">
       <div className='max-w-screen-xl mx-auto px-4'>
         <div className="grid grid-cols-3 items-center">
-          <div className="mb-1 text-sm font-light tracking-wider">
-            <ul className="flex items-center justify-start gap-2 md:gap-6 px-2">
+          <div className="flex justify-start gap-8 items-center">
+            <div className="block md:hidden">
+              <button className="masthead-btn hamburger-btn inline-block !bg-blue-200" href='#'>
+                <HamburgerMenuIcon size={18} />
+              </button>
+            </div>
+            <ul className="hidden md:flex items-center justify-start gap-2 md:gap-4 text-sm font-light tracking-wider">
               {navigation.map(({ path, title }) => (
                 <li key={path} className={cn(
                   "navbar-item",
