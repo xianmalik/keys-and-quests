@@ -12,8 +12,8 @@ export default function PostHeader({ data }) {
   }
 
   return (
-    <div className="mx-auto max-w-screen-xl w-full px-4 my-16">
-      <div className="grid grid-cols-1 md:grid-cols-3 overflow-hidden rounded-2xl border border-gray300 shadow-lg md:flex-row-reverse">
+    <div className="mx-auto max-w-screen-xl w-full my-16">
+      <div className="grid grid-cols-1 md:grid-cols-3 overflow-hidden border-2 border-black shadow-retro md:flex-row-reverse bg-white">
         <div className="md:order-last">
           <Image alt={data?.title} className="w-full h-full object-cover transition-all" src={data?.mainImage?.asset?.url} height={280} width={280} />
         </div>

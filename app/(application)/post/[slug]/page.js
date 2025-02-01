@@ -50,9 +50,9 @@ export default function Post({ params }) {
   return (
     <Loader isLoading={loading}>
       {data ? (
-        <>
+        <div className='px-4'>
           <PostHeader data={data} />
-          <article className='mx-auto max-w-4xl w-full my-16 px-4'>
+          <article className='mx-auto max-w-screen-md w-full mb-16 py-8 px-8 lg:px-16 lg:py-12 xl:px-18 bg-white border-2 border-black shadow-retro'>
             <PortableText
               value={data?.body}
               components={{
@@ -149,7 +149,7 @@ export default function Post({ params }) {
               )}
             </div>
           </footer>
-        </>
+        </div>
       ) : (
         <p className="text-center my-auto text-2xl font-semibold tracking-wide">
           404: Post not found

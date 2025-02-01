@@ -20,7 +20,7 @@ export default function FAQ() {
       >
         <h1 className={cn(
           "text-3xl md:text-6xl text-white font-bold tracking-wider text-center",
-          "block h-full w-full py-16 md:py-64 px-4 bg-black/50"
+          "block h-full w-full py-16 md:py-52 px-4 bg-black/50"
         )}>Frequently Asked Questions</h1>
       </div>
       <div className="max-w-4xl w-full mx-auto px-4">
