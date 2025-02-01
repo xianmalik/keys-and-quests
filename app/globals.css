@@ -114,14 +114,38 @@ body {
   box-shadow: #222 4px 4px 0 0;
 }
 
-.masthead .search-btn {
+
+.btn-retro {
+  @apply px-4 py-2 inline-block;
+  @apply font-semibold uppercase tracking-[2px];
+  @apply text-[#222] hover:text-white text-xs;
+  @apply border-2 border-[#222];
+  @apply bg-purple-200 hover:bg-[#222];
+  @apply transition-all relative;
+  box-shadow: #222 4px 4px 0 0;
+}
+
+.btn-retro:hover {
+  box-shadow: transparent 0 0 0 0;
+}
+
+.masthead .masthead-btn {
   @apply h-10 w-10 text-[#222];
-  @apply grid place-items-center ms-4 mb-1;
-  @apply border-2  border-[#222] bg-green-200;
+  @apply grid place-items-center;
+  @apply text-[#222] border-2  border-[#222];
   @apply transition-all relative cursor-pointer;
   box-shadow: #222 4px 4px 0 0;
 }
 
-.masthead .search-btn:hover {
+.masthead .masthead-btn:hover {
   box-shadow: transparent 0 0 0 0;
 }
+
+.masthead .search-btn {
+  @apply bg-green-200;
+}
+
+.masthead .hamburger-btn {
+  @apply bg-blue-200;
+}
+

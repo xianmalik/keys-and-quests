@@ -6,6 +6,7 @@ import { Crosshair2Icon } from "@radix-ui/react-icons"
 import getAssetUrl from "@/lib/sanity/getAssetUrl"
 import { formatDate } from "@/lib/utils";
 import { Fragment } from "react";
+import Link from "next/link";
 
 export default function PostGrid({ posts }) {
 
@@ -31,21 +32,26 @@ export default function PostGrid({ posts }) {
               {_createdAt && <div className="mt-auto flex items-center mb-1">
                 <div className="text-xs text-gray600">{formatDate(_createdAt)}</div>
               </div>}
-              <h4 className="text-xl md:text-2xl text-gray-800 mb-2">
+                <h4 className="text-xl md:text-2xl text-gray-800 mb-2 font-semibold">
                 {title}
               </h4>
               {tag && <p className="mb-2 md:mb-4 text-gray-600 text-base">
                 {tag}
               </p>}
-              <div className="flex items-center justify-start gap-2 mb-2">
+                {/* <div className="flex items-center justify-start gap-2 mb-2">
                   <Badge className="uppercase text-xs tracking-wider rounded-full">
                     {properties.brandName[0]}
                   </Badge>
                   <Badge variant="secondary" className="uppercase text-xs tracking-wider rounded-full">
-                  <Crosshair2Icon className="me-1" />
+                    <Crosshair2Icon className="me-1" />
                     {properties.switchType}
                   </Badge>
-              </div>
+              </div> */}
+                <div className="mt-2 mb-2">
+                  <Link href={"/post/" + slug.current} className="btn-retro">
+                    Read more
+                  </Link>
+                </div>
             </div>
           </div>
         </a>
