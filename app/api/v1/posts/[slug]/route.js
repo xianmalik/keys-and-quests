@@ -29,6 +29,12 @@ export async function GET(request, { params }) {
       }
     });
 
+    const notionPageResponse = await notionClient.blocks.children.list({
+      block_id: notionResponse?.results?.[0]?.id,
+    });
+
+    // console.log(notionResponse);
+
     const properties = mutateProperties(notionResponse?.results?.[0]?.properties);
 
     if (!post._id) {
@@ -54,6 +60,7 @@ export async function GET(request, { params }) {
       post: {
         ...post,
         properties,
+        content: notionPageResponse?.results,
         prev,
         next
       }

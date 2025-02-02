@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Image from "next/image";
-import { PortableText } from '@portabletext/react'
+// import { PortableText } from '@portabletext/react'
 
 // Icons
 import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
@@ -23,7 +23,8 @@ import getAssetUrl from "@/lib/sanity/getAssetUrl";
 import apiClient from "@/lib/apiClient";
 import PostHeader from "@/components/posts/PostHeader";
 import DisqusComments from "@/components/posts/DisqusComments";
-import {ImageModal} from "@/components/ImageModal";
+import { ImageModal } from "@/components/ImageModal";
+import BlockRenderer from "@/components/BlockRenderer";
 
 export default function Post({ params }) {
   const [data, setData] = useState();
@@ -53,7 +54,10 @@ export default function Post({ params }) {
         <div className='px-4'>
           <PostHeader data={data} />
           <article className='mx-auto max-w-screen-md w-full mb-16 py-8 px-8 lg:px-16 lg:py-12 xl:px-18 bg-white border-2 border-black shadow-retro'>
-            <PortableText
+            {data?.content?.length > 0 && (
+              <BlockRenderer blocks={data?.content} />
+            )}
+            {/* <PortableText
               value={data?.body}
               components={{
                 types: {
@@ -67,7 +71,7 @@ export default function Post({ params }) {
                   bullet: ({ children }) => <li style={{ listStyleType: 'disc' }} className="ms-4 mb-2">{children}</li>,
                 },
               }}
-            />
+            /> */}
 
             {data?.youtube && (
               <div className="my-8">
