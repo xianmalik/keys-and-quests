@@ -4,7 +4,7 @@ import { FacebookIcon } from '@/lib/icons'
 
 export default function Socials() {
   return (
-    <ul className="flex items-center justify-center gap-2 md:gap-4 px-2">
+    <ul className="flex items-center justify-center gap-2 md:gap-6 lg:gap-8 px-2">
       <li>
         <Link href="https://www.youtube.com/@keysandquests" target="_blank">
           <VideoIcon />

@@ -4,9 +4,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 // import Filter from "@/components/posts/Filter";
-import PostGrid from "@/components/posts/PostGrid";
 import Loader from "@/components/Loader";
+import PostGrid from "@/components/posts/PostGrid";
+
 import generateRssFeed from "@/lib/rss";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -36,6 +38,9 @@ export default function Home() {
       </h1>
       <Loader isLoading={loading}>
         <PostGrid posts={posts} />
+        <Button variant="retro" className="bg-cyan-200 mx-auto mt-6 md:mt-12 !block">
+          Load more
+        </Button>
       </Loader>
     </div>
   );
