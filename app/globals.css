@@ -99,13 +99,14 @@ body {
 
 /* Header Styles */
 .masthead .navbar-item {
-  @apply font-medium uppercase tracking-[2px];
+  @apply font-semibold uppercase tracking-[2px] text-xs;
   @apply border-2 border-transparent bg-transparent;
   @apply transition-all relative;
   box-shadow: transparent 0 0 0 0;
 }
+
 .masthead .navbar-item a {
-  @apply px-6 py-2 inline-block;
+  @apply px-4 py-2 inline-flex items-center;
 }
 
 .masthead .navbar-item:hover,
@@ -114,23 +115,8 @@ body {
   box-shadow: #222 4px 4px 0 0;
 }
 
-
-.btn-retro {
-  @apply px-4 py-2 inline-block;
-  @apply font-semibold uppercase tracking-[2px];
-  @apply text-[#222] hover:text-white text-xs;
-  @apply border-2 border-[#222];
-  @apply bg-purple-200 hover:bg-[#222];
-  @apply transition-all relative;
-  box-shadow: #222 4px 4px 0 0;
-}
-
-.btn-retro:hover {
-  box-shadow: transparent 0 0 0 0;
-}
-
 .masthead .masthead-btn {
-  @apply h-10 w-10 text-[#222];
+  @apply !h-9 !w-9 text-[#222];
   @apply grid place-items-center;
   @apply text-[#222] border-2  border-[#222];
   @apply transition-all relative cursor-pointer;

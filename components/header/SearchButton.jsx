@@ -12,9 +12,11 @@ export default function SearchButton() {
     <Dialog>
       {/* Button to open modal */}
       <DialogTrigger asChild>
-        <buton className="masthead-btn search-btn">
-          <SearchIcon size={18} />
-        </buton>
+        <div>
+          <button className="masthead-btn search-btn">
+            <SearchIcon size={18} />
+          </button>
+        </div>
       </DialogTrigger>
 
       {/* Modal Content */}
