@@ -1,6 +1,5 @@
 "use client";
 
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 import navigation from '@/content/navigation';
@@ -22,7 +21,7 @@ export default function HamburgerMenu() {
           {/* Top Part */}
           <div>
             <h2 className="text-lg font-semibold -mt-[2px]">
-              <a href="/" className="text-xl font-bold tracking-widest uppercase text-center mb-6">
+              <a href="/" className="text-xl font-bold tracking-widest uppercase mb-6">
                 Keys And Quests
               </a>
             </h2>
