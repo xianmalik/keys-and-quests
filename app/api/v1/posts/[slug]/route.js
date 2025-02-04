@@ -33,7 +33,7 @@ export async function GET(request, { params }) {
       block_id: notionResponse?.results?.[0]?.id,
     });
 
-    // console.log(notionResponse);
+    // console.log(notionResponse?.results?.[0]?.properties);
 
     const properties = mutateProperties(notionResponse?.results?.[0]?.properties);
 

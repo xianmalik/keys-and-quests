@@ -57,31 +57,16 @@ export default function Post({ params }) {
             {data?.content?.length > 0 && (
               <BlockRenderer blocks={data?.content} />
             )}
-            {/* <PortableText
-              value={data?.body}
-              components={{
-                types: {
-                  image: ({ value }) =>
-                    <ImageModal width={600} height={400} className="aspect-[3:2] object-cover mx-auto mt-8 mb-2" src={getAssetUrl(value.asset)} alt={data?.title} />,
-                },
-                list: {
-                  bullet: ({ children }) => <ul className="mt-2">{children}</ul>,
-                },
-                listItem: {
-                  bullet: ({ children }) => <li style={{ listStyleType: 'disc' }} className="ms-4 mb-2">{children}</li>,
-                },
-              }}
-            /> */}
 
-            {data?.youtube && (
+            {data?.properties?.video && (
               <div className="my-8">
-                <h3 className="text-xl font-medium mb-4 mt-16">Sound Test & Review Video</h3>
+                <h3 className="text-xl font-medium mb-4 mt-16">Sound Test Video</h3>
                 <iframe
                   className={cn(
                     "mx-auto w-full",
-                    data?.videoType === 'shorts' ? 'aspect-[9/16] max-w-lg' : 'aspect-video'
+                    data?.properties?.videoType === 'shorts' ? 'aspect-[9/16] max-w-lg' : 'aspect-video'
                   )}
-                  src={data?.youtube}
+                  src={data?.properties?.video}
                   title={data?.title}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
@@ -89,22 +74,22 @@ export default function Post({ params }) {
                 </iframe>
               </div>
             )}
-            {data.gallery && data.gallery.length > 0 && (
+            {data?.properties?.gallery && data.properties?.gallery.length > 0 && (
               <div className="my-8 overflow-hidden">
                 <h3 className="text-xl font-medium mb-0 mt-16">Image Gallery</h3>
                 <Carousel opts={{
                   loop: true,
                 }}>
                   <CarouselContent>
-                    {data.gallery.map((media, index) => (
+                    {data.properties?.gallery.map(({ name, file: { url } }, index) => (
                       <CarouselItem key={index} className="md:basis-1/2">
                         <Image
                           width={600} height={400}
                           className="aspect-[3:2] object-cover mx-auto mt-8 mb-2 rounded-lg overflow-hidden shadow"
-                          src={getAssetUrl(media.asset)}
-                          alt={media?.alt}
+                          src={url}
+                          alt={name}
                         />
-                        <h6 className="text-sm text-center">{media?.caption}</h6>
+                        <h6 className="text-sm text-center">{name}</h6>
                       </CarouselItem>
                     ))}
                   </CarouselContent>

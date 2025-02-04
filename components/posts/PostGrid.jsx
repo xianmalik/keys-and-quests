@@ -27,7 +27,7 @@ export default function PostGrid({ posts }) {
       {posts?.map(({
         title, tag, properties, slug, mainImage, _createdAt
       }) => (title && slug && mainImage) ? (
-        <div className="flex flex-col" key={`${id}-${slug}`}>
+          <div className="flex flex-col" key={`${id}-${slug.current}`}>
             <div className="transition-all flex flex-1 flex-col overflow-hidden border-2 border-black bg-white hover:shadow-retro shadow-none">
               {mainImage?.asset?.url && (
                 <div className="shadow-md">
@@ -46,7 +46,7 @@ export default function PostGrid({ posts }) {
                 {/* Title */}
                 <h4 className="text-xl md:text-2xl text-gray-800 mb-1 font-semibold">{title}</h4>
                 {/* Tagline Subtitle */}
-                {tag && <p className="mb-2 md:mb-3 text-gray-600 text-base">{tag}</p>}
+                {properties?.tagline && <p className="mb-2 md:mb-3 text-gray-600 text-base">{properties?.tagline}</p>}
                 {/* Metas */}
                 <div className="flex items-center justify-start gap-6 mb-4 uppercase text-xs tracking-wider font-semibold">
                   <span className="flex items-center">

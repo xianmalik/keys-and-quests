@@ -25,7 +25,7 @@ export default function PostHeader({ data }) {
           </div>
           <h1 className='text-xl md:text-[2.5rem] font-semibold leading-none mb-4 md:mb-8'>
             {data?.title}
-            <span className="font-normal">{!!data?.tag && ` - ${data?.tag}`}</span>
+            <span className="font-normal">{!!data?.properties.tagline && ` - ${data?.properties.tagline}`}</span>
           </h1>
           <div className="flex flex-col items-start text-sm font-light mb-4 md:mb-8 gap-1 text-gray-600">
             <div className="flex items-center gap-1">
@@ -55,10 +55,10 @@ export default function PostHeader({ data }) {
               <AlignBottomIcon className="me-1" />
               Stem Material: <span className="font-medium">{data?.properties?.stemMaterial}</span>
             </div>
-            {data?.price && <div className="flex items-center gap-1">
+            {/* {data?.price && <div className="flex items-center gap-1">
               <ComponentBooleanIcon className="me-1" />
               Price: <span className="font-medium">${data?.price}</span> per switch
-            </div>}
+            </div>} */}
           </div>
           <div className="text-xs text-gray600">Published: {formatDate(data?._createdAt)}</div>
         </div>
