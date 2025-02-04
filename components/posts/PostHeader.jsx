@@ -1,8 +1,6 @@
 import Image from "next/image";
 
-import { AlignBottomIcon, BlendingModeIcon, BorderBottomIcon, BorderTopIcon, CommitIcon, Component1Icon, ComponentBooleanIcon, Crosshair2Icon } from "@radix-ui/react-icons";
-
-import { Badge } from '@/components/ui/badge';
+import { CaseSensitiveIcon, DropletsIcon, LineChartIcon, LucideRectangleVertical, PanelBottomDashedIcon, PanelTopDashedIcon, SquareMousePointerIcon } from 'lucide-react';
 
 import { formatDate } from "@/lib/utils";
 
@@ -18,41 +16,37 @@ export default function PostHeader({ data }) {
           <Image alt={data?.title} className="max-h-48 md:max-h-full w-full h-full object-cover transition-all" src={data?.mainImage?.asset?.url} height={280} width={280} />
         </div>
         <div className="relative col-span-2 flex flex-col justify-center py-6 px-8 lg:px-16 lg:py-12 xl:px-24">
-          <div className="flex items-center gap-2 font-light mb-2 md:mb-4">
-            {data?.categories?.map(({ _id, title }) => (
-              <Badge className="tracking-wider rounded-full" key={_id}>{title}</Badge>
-            ))}
-          </div>
           <h1 className='text-xl md:text-[2.5rem] font-semibold leading-none mb-4 md:mb-8'>
             {data?.title}
             <span className="font-normal">{!!data?.properties.tagline && ` - ${data?.properties.tagline}`}</span>
           </h1>
           <div className="flex flex-col items-start text-sm font-light mb-4 md:mb-8 gap-1 text-gray-600">
             <div className="flex items-center gap-1">
-              <Component1Icon className="me-1" />Brand: <span className="font-medium">{data?.properties?.brandName[0]}</span>
+              <CaseSensitiveIcon size={16} className="me-1" />
+              Brand: <span className="font-medium">{data?.properties?.brandName[0]}</span>
             </div>
             <div className="flex items-center gap-1">
-              <Crosshair2Icon className="me-1" />
+              <SquareMousePointerIcon size={16} className="me-1" />
               Switch Type: <span className="font-medium">{data?.properties?.switchType}</span>
             </div>
             <div className="flex items-center gap-1">
-              <CommitIcon className="me-1" />
+              <LineChartIcon size={16} className="me-1" />
               Actuation Point: <span className="font-medium">{data?.properties?.actuation}±5g</span>
             </div>
             <div className="flex items-center gap-1">
-              <BlendingModeIcon className="me-1" />
+              <DropletsIcon size={16} className="me-1" />
               Lube Status: <span className="font-medium">{data?.properties?.lubeStatus}</span>
             </div>
             <div className="flex items-center gap-1">
-              <BorderTopIcon className="me-1" />
+              <PanelTopDashedIcon size={16} className="me-1" />
               Top Housing: <span className="font-medium">{data?.properties?.topHousing}</span>
             </div>
             <div className="flex items-center gap-1">
-              <BorderBottomIcon className="me-1" />
+              <PanelBottomDashedIcon size={16} className="me-1" />
               Bottom Housing: <span className="font-medium">{data?.properties?.bottomHousing}</span>
             </div>
             <div className="flex items-center gap-1">
-              <AlignBottomIcon className="me-1" />
+              <LucideRectangleVertical size={16} className="me-1" />
               Stem Material: <span className="font-medium">{data?.properties?.stemMaterial}</span>
             </div>
             {/* {data?.price && <div className="flex items-center gap-1">

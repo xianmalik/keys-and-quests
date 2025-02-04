@@ -2,14 +2,10 @@ import { Fragment, useId } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-// import { Crosshair2Icon } from "@radix-ui/react-icons"
-
-// import { Badge } from "@/components/ui/badge"
-
 import { formatDate } from "@/lib/utils";
 import getAssetUrl from "@/lib/sanity/getAssetUrl"
 import { Button } from "../ui/button";
-import { DotIcon } from "@radix-ui/react-icons";
+import { DotFilledIcon } from "@radix-ui/react-icons";
 
 export default function PostGrid({ posts }) {
   const id = useId();
@@ -50,11 +46,11 @@ export default function PostGrid({ posts }) {
                 {/* Metas */}
                 <div className="flex items-center justify-start gap-6 mb-4 uppercase text-xs tracking-wider font-semibold">
                   <span className="flex items-center">
-                    <DotIcon size={8} />
+                    <DotFilledIcon />
                     {properties.brandName[0]}
                   </span>
                   <span className="flex items-center">
-                    <DotIcon size={8} />
+                    <DotFilledIcon />
                     {properties.switchType}
                   </span>
                 </div>
