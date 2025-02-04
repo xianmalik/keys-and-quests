@@ -11,7 +11,7 @@ export default function HamburgerMenu() {
     <Sheet>
       <SheetTrigger asChild>
         <div>
-          <button className="masthead-btn hamburger-btn !bg-blue-200">
+          <button className="masthead-btn hamburger-btn bg-blue-200">
             <MenuIcon size={22} />
           </button>
         </div>

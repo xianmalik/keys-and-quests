@@ -7,6 +7,7 @@ import Header from "@/blocks/Header";
 import Footer from "@/blocks/Footer";
 
 import Maintenance from "@/components/Maintenance";
+import GlitchCursor from '@/components/GlitchCursor'
 
 import "./globals.css";
 
@@ -56,6 +57,7 @@ export default function RootLayout({ children }) {
             </div>
             <Footer />
           </main>
+          <GlitchCursor />
         </body>
       </html>
     </React.StrictMode>

@@ -124,6 +124,7 @@ body {
 }
 
 .masthead .masthead-btn:hover {
+  @apply bg-[#222] text-white;
   box-shadow: transparent 0 0 0 0;
 }
 
