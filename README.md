@@ -1,9 +1,9 @@
 <p align="center">
-  <h2 align="center">⌚ Keys & Quests</h2>
+  <h2 align="center">🔑 Keys & Quests</h2>
 </p>
 
 <p align="center">
-	E-Commerce Website Template powered by Next.JS & TailwindCSS 🌩️ 
+	Blogging website :muscle: powered by Next.JS
 </p>
 
 <p align="center">
@@ -26,12 +26,7 @@
 	<a href="https://vercel.com/"><img src="https://img.shields.io/badge/Vercel-302D41.svg?logo=vercel&logoColor=white&style=for-the-badge" /></a>
 	<a href="https://notion.com/"><img src="https://img.shields.io/badge/Notion-302D41?logo=notion&logoColor=FFFFFF&style=for-the-badge" /></a>
 	<a href="https://ui.shadcn.com/"><img src="https://img.shields.io/badge/Bun-302D41?logo=bun&logoColor=fff&style=for-the-badge"/></a>
-	<a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-302D41?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC"/></a>
 	<a href="https://ui.shadcn.com/"><img src="https://img.shields.io/badge/shadcn%2Fui-302D41?logo=shadcnui&logoColor=fff&style=for-the-badge"/></a>
-	<a href="https://sanity.io/"><img src="https://img.shields.io/badge/sanity-302D41?logo=sanity&logoColor=fff&style=for-the-badge"/></a>
-</p>
-
-<p align="center">
-	<!-- <a href="https://ui.shadcn.com/"><img src="https://img.shields.io/badge/TypeScript-302D41?logo=typescript&logoColor=3178C6&style=for-the-badge"/></a> -->
-	<!-- <a href="https://ui.shadcn.com/"><img src="https://img.shields.io/badge/Storybook-302D41?logo=storybook&logoColor=FF4785&style=for-the-badge"/></a> -->
+	<a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-302D41?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC"/></a>
+	<a href="https://sanity.io/"><img src="https://img.shields.io/badge/sanity-302D41?logo=sanity&logoColor=f50&style=for-the-badge"/></a>
 </p>
