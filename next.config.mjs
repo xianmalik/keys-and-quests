@@ -8,8 +8,17 @@ const nextConfig = {
       // },
     ];
   },
-  // All images are served through our own /api/v2/image proxy, so no
-  // external image hosts need to be whitelisted here.
+  // All Notion-sourced images are served through our own /api/v2/image proxy.
+  // YouTube thumbnails are used directly as video poster images.
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'img.youtube.com',
+        port: '',
+      }
+    ]
+  }
 };
 
 export default nextConfig;

@@ -1,14 +1,17 @@
+'use client'
+
 import { useState } from 'react'
 import Image from "next/image"
 
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { cn } from "@/lib/utils"
 
-export const ImageModal = ({ src, alt, width, height, ...rest }) => {
+export const ImageModal = ({ src, alt, width, height, className, ...rest }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -19,15 +22,16 @@ export const ImageModal = ({ src, alt, width, height, ...rest }) => {
           alt={alt}
           width={width}
           height={height}
-          style={{ cursor: 'pointer' }}
-          onClick={() => setIsOpen(true)}
+          className={cn("cursor-zoom-in", className)}
           {...rest}
         />
       </DialogTrigger>
 
-      <DialogContent>
-        <DialogHeader>{alt}</DialogHeader>
-        <Image width={window.innerHeight / 2 * 3} height={window.innerHeight} src={src} alt={alt} className="mx-auto" />
+      <DialogContent className="max-w-3xl border-2 border-black bg-white p-4 shadow-retro sm:rounded-none">
+        <DialogTitle className="text-sm font-medium text-gray-700">{alt}</DialogTitle>
+        <div className="relative h-[70vh] w-full">
+          <Image src={src} alt={alt} fill className="object-contain" />
+        </div>
       </DialogContent>
     </Dialog>
   );

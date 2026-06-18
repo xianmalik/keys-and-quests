@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import Image from "next/image";
 
 // Icons
 import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
@@ -12,17 +11,17 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
   CarouselPrevious,
+  CarouselNext,
+  CarouselDots,
 } from "@/components/ui/carousel"
-
-import { cn } from "@/lib/utils";
 
 import apiClient from "@/lib/apiClient";
 import PostHeader from "@/components/posts/PostHeader";
 import DisqusComments from "@/components/posts/DisqusComments";
 import { ImageModal } from "@/components/ImageModal";
 import BlockRenderer from "@/components/BlockRenderer";
+import VideoEmbed from "@/components/posts/VideoEmbed";
 
 export default function Post({ params }) {
   const [data, setData] = useState();
@@ -51,52 +50,53 @@ export default function Post({ params }) {
       {data ? (
         <div className='px-4'>
           <PostHeader data={data} />
-          <article className='mx-auto max-w-screen-md w-full mb-16 py-8 px-8 lg:px-16 lg:py-12 xl:px-18 bg-white border-2 border-black shadow-retro'>
-            {data?.content?.length > 0 && (
-              <BlockRenderer blocks={data?.content} />
-            )}
 
-            {data?.properties?.video && (
-              <div className="my-8">
-                <h3 className="text-xl font-medium mb-4 mt-16">Sound Test Video</h3>
-                <iframe
-                  className={cn(
-                    "mx-auto w-full",
-                    data?.properties?.videoType === 'shorts' ? 'aspect-[9/16] max-w-lg' : 'aspect-video'
-                  )}
-                  src={data?.properties?.video}
-                  title={data?.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen>
-                </iframe>
-              </div>
-            )}
-            {data?.properties?.gallery && data.properties?.gallery.length > 0 && (
-              <div className="my-8 overflow-hidden">
-                <h3 className="text-xl font-medium mb-0 mt-16">Image Gallery</h3>
-                <Carousel opts={{
-                  loop: true,
-                }}>
-                  <CarouselContent>
-                    {data.properties?.gallery.map(({ name, url }, index) => (
-                      <CarouselItem key={index} className="md:basis-1/2">
-                        <Image
-                          width={600} height={400}
-                          className="aspect-[3:2] object-cover mx-auto mt-8 mb-2 rounded-lg overflow-hidden shadow"
-                          src={url}
-                          alt={name}
-                        />
-                        <h6 className="text-sm text-center">{name}</h6>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
-                </Carousel>
-              </div>
-            )}
-          </article>
+          <div className="mx-auto mb-16 grid w-full max-w-screen-xl grid-cols-1 items-start gap-8 lg:grid-cols-3">
+            <article className="w-full bg-white border-2 border-black shadow-retro py-8 px-8 lg:col-span-2 lg:px-16 lg:py-12 xl:px-18">
+              {data?.content?.length > 0 && (
+                <BlockRenderer blocks={data?.content} />
+              )}
+            </article>
+
+            <aside className="flex w-full flex-col gap-8 lg:col-span-1">
+              {data?.properties?.video && (
+                <section className="w-full bg-white border-2 border-black shadow-retro py-6 px-6">
+                  <h3 className="text-lg font-medium mb-4">Sound Test Video</h3>
+                  <VideoEmbed
+                    src={data.properties.video}
+                    videoType={data.properties.videoType}
+                    title={data.title}
+                  />
+                </section>
+              )}
+
+              {data?.properties?.gallery && data.properties?.gallery.length > 0 && (
+                <section className="w-full overflow-hidden bg-white border-2 border-black shadow-retro py-6 px-6">
+                  <h3 className="text-lg font-medium mb-2">Image Gallery</h3>
+                  <Carousel opts={{
+                    loop: true,
+                  }}>
+                    <CarouselContent>
+                      {data.properties?.gallery.map(({ name, url }, index) => (
+                        <CarouselItem key={index}>
+                          <ImageModal
+                            width={600} height={400}
+                            className="aspect-[3:2] object-cover mx-auto mt-8 mb-2 rounded-lg overflow-hidden shadow"
+                            src={url}
+                            alt={name}
+                          />
+                          <h6 className="text-sm text-center">{name}</h6>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="left-2 border-black bg-white/90 hover:bg-white" />
+                    <CarouselNext className="right-2 border-black bg-white/90 hover:bg-white" />
+                    <CarouselDots className="mt-4" />
+                  </Carousel>
+                </section>
+              )}
+            </aside>
+          </div>
 
           {/* Commenting */}
           <div className='mx-auto max-w-4xl w-full my-16 px-4'>

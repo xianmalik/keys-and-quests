@@ -1,5 +1,5 @@
 import { notionClient } from '@/lib/notionClient'
-import { resolveFileUrl } from '@/lib/notion/images'
+import { resolveFileUrl, getCachedPageFiles, cachePageFiles } from '@/lib/notion/images'
 
 export async function GET(request, { params }) {
   const { pageId } = params
@@ -7,10 +7,17 @@ export async function GET(request, { params }) {
   const index = searchParams.get('index')
 
   try {
-    const page = await notionClient.pages.retrieve({ page_id: pageId })
+    let files = getCachedPageFiles(pageId)
+
+    if (!files) {
+      const page = await notionClient.pages.retrieve({ page_id: pageId })
+      files = { cover: page.cover, gallery: page.properties?.['Gallery']?.files }
+      cachePageFiles(pageId, files)
+    }
+
     const file = index !== null
-      ? page.properties?.['Gallery']?.files?.[Number(index)]
-      : (page.cover || page.properties?.['Gallery']?.files?.[0])
+      ? files.gallery?.[Number(index)]
+      : (files.cover || files.gallery?.[0])
 
     const url = resolveFileUrl(file)
     if (!url) {

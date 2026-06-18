@@ -1,12 +1,19 @@
 import { notionClient } from '@/lib/notionClient'
-import { resolveFileUrl } from '@/lib/notion/images'
+import { resolveFileUrl, getCachedBlockImage, cacheBlockImage } from '@/lib/notion/images'
 
 export async function GET(request, { params }) {
   const { blockId } = params
 
   try {
-    const block = await notionClient.blocks.retrieve({ block_id: blockId })
-    const url = block?.image ? resolveFileUrl(block.image) : undefined
+    let image = getCachedBlockImage(blockId)
+
+    if (!image) {
+      const block = await notionClient.blocks.retrieve({ block_id: blockId })
+      image = block?.image
+      if (image) cacheBlockImage(blockId, image)
+    }
+
+    const url = image ? resolveFileUrl(image) : undefined
 
     if (!url) {
       return new Response('Not found', { status: 404 })
