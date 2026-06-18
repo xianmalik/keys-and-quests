@@ -7,14 +7,14 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 export default function Archive() {
-  const [posts, setPosts] = useState([])
+  const [items, setItems] = useState([])
   const [nextCursor, setNextCursor] = useState(undefined)
   const [loading, setLoading] = useState(false)
 
   async function fetchData(cursor = undefined) {
     setLoading(true)
     try {
-      const response = await axios.get('/api/v2/posts', {
+      const response = await axios.get('/api/v2/archive', {
         params: {
           start_cursor: cursor
         }
@@ -26,11 +26,11 @@ export default function Archive() {
 
       if (data.success) {
         if (cursor) {
-          setPosts(prev => [...prev, ...data.posts.results]);
+          setItems(prev => [...prev, ...data.items]);
         } else {
-          setPosts(data.posts.results);
+          setItems(data.items);
         }
-        setNextCursor(data.posts.next_cursor);
+        setNextCursor(data.nextCursor);
       }
     } catch (error) {
       console.error('Error fetching posts:', error);
@@ -53,7 +53,7 @@ export default function Archive() {
         )}>Archive</h1>
       </div>
       <div className="border-2 border-[#222] shadow-retro p-6 max-w-screen-lg mx-auto bg-white">
-        {posts ? (
+        {items ? (
           <>
 
             <Table>
@@ -67,30 +67,21 @@ export default function Archive() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {posts?.map((post) => (
-                  <TableRow key={post.id}>
-                    <TableCell>{post.properties.ID.unique_id.prefix}-{post.properties.ID.unique_id.number}</TableCell>
+                {items?.map((item) => (
+                  <TableRow key={item.id}>
+                    <TableCell>{item.idLabel}</TableCell>
                     <TableCell>
-                      {post.cover?.file?.url && (
+                      {item.coverImageUrl && (
                         <img
-                          src={post.cover.file.url}
+                          src={item.coverImageUrl}
                           alt=""
                           className="w-10 h-10 object-cover rounded-sm"
                         />
                       )}
                     </TableCell>
-                    <TableCell>
-                      <a
-                        href={post.public_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:underline"
-                      >
-                        {post.properties.Name.title[0]?.plain_text}
-                      </a>
-                    </TableCell>
-                    <TableCell>{post.properties['Switch Brand'].multi_select[0]?.name}</TableCell>
-                    <TableCell>{post.properties.Type.select?.name}</TableCell>
+                    <TableCell>{item.name}</TableCell>
+                    <TableCell>{item.brand}</TableCell>
+                    <TableCell>{item.switchType}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

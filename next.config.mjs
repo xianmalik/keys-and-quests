@@ -8,16 +8,13 @@ const nextConfig = {
       // },
     ];
   },
+  // All Notion-sourced images are served through our own /api/v2/image proxy.
+  // YouTube thumbnails are used directly as video poster images.
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'cdn.sanity.io',
-        port: '',
-      },
-      {
-        protocol: 'https',
-        hostname: 'prod-files-secure.s3.us-west-2.amazonaws.com',
+        hostname: 'img.youtube.com',
         port: '',
       }
     ]

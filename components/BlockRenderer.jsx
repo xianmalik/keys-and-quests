@@ -32,7 +32,7 @@ const renderBlock = (block) => {
     case "heading_1":
       return (
         <h1 key={block.id} className="text-3xl font-bold text-gray-900">
-          {block.heading_1.text.map((text, index) => (
+          {block.heading_1.rich_text.map((text, index) => (
             <span key={index}>{text.plain_text}</span>
           ))}
         </h1>
@@ -41,7 +41,7 @@ const renderBlock = (block) => {
     case "heading_2":
       return (
         <h2 key={block.id} className="text-2xl font-semibold text-gray-800">
-          {block.heading_2.text.map((text, index) => (
+          {block.heading_2.rich_text.map((text, index) => (
             <span key={index}>{text.plain_text}</span>
           ))}
         </h2>
@@ -50,7 +50,7 @@ const renderBlock = (block) => {
     case "heading_3":
       return (
         <h3 key={block.id} className="text-xl font-medium text-gray-700">
-          {block.heading_3.text.map((text, index) => (
+          {block.heading_3.rich_text.map((text, index) => (
             <span key={index}>{text.plain_text}</span>
           ))}
         </h3>
@@ -80,7 +80,7 @@ const renderBlock = (block) => {
       return (
         <ul key={block.id} className="list-disc pl-6">
           <li className="text-gray-800">
-            {block.bulleted_list_item.text.map((text, index) => (
+            {block.bulleted_list_item.rich_text.map((text, index) => (
               <span key={index}>{text.plain_text}</span>
             ))}
           </li>
@@ -91,7 +91,7 @@ const renderBlock = (block) => {
       return (
         <ol key={block.id} className="list-decimal pl-6">
           <li className="text-gray-800">
-            {block.numbered_list_item.text.map((text, index) => (
+            {block.numbered_list_item.rich_text.map((text, index) => (
               <span key={index}>{text.plain_text}</span>
             ))}
           </li>
@@ -101,7 +101,7 @@ const renderBlock = (block) => {
     case "quote":
       return (
         <blockquote key={block.id} className="border-l-4 border-gray-300 pl-4 italic text-gray-600">
-          {block.quote.text.map((text, index) => (
+          {block.quote.rich_text.map((text, index) => (
             <span key={index}>{text.plain_text}</span>
           ))}
         </blockquote>
@@ -111,7 +111,7 @@ const renderBlock = (block) => {
       return (
         <pre key={block.id} className="bg-gray-100 p-4 rounded-md">
           <code className="text-sm text-gray-800">
-            {block.code.text.map((text, index) => text.plain_text).join(" ")}
+            {block.code.rich_text.map((text, index) => text.plain_text).join(" ")}
           </code>
         </pre>
       );
@@ -119,9 +119,9 @@ const renderBlock = (block) => {
     case "callout":
       return (
         <div key={block.id} className="flex items-start p-4 bg-yellow-100 rounded-md shadow-md">
-          <span className="text-2xl mr-2">{block.callout.icon.emoji}</span>
+          <span className="text-2xl mr-2">{block.callout.icon?.emoji}</span>
           <div>
-            {block.callout.text.map((text, index) => (
+            {block.callout.rich_text.map((text, index) => (
               <span key={index} className="text-gray-700">
                 {text.plain_text}
               </span>
@@ -161,7 +161,7 @@ const renderBlock = (block) => {
             disabled
             className="text-blue-500"
           />
-          {block.to_do.text.map((text, index) => (
+          {block.to_do.rich_text.map((text, index) => (
             <span key={index} className="text-gray-800">
               {text.plain_text}
             </span>
