@@ -1,6 +1,14 @@
 import Image from "next/image";
 
-import { CaseSensitiveIcon, DropletsIcon, LineChartIcon, LucideRectangleVertical, PanelBottomDashedIcon, PanelTopDashedIcon, SquareMousePointerIcon } from 'lucide-react';
+import {
+  BrandIcon,
+  SwitchTypeIcon,
+  ActuationIcon,
+  LubeIcon,
+  TopHousingIcon,
+  BottomHousingIcon,
+  StemMaterialIcon,
+} from "@/components/icons/SwitchIcons";
 
 import { formatDate } from "@/lib/utils";
 
@@ -22,31 +30,31 @@ export default function PostHeader({ data }) {
           </h1>
           <div className="flex flex-col items-start text-sm font-light mb-4 md:mb-8 gap-1 text-gray-600">
             <div className="flex items-center gap-1">
-              <CaseSensitiveIcon size={16} className="me-1" />
+              <BrandIcon size={16} className="me-1" />
               Brand: <span className="font-medium">{data?.properties?.brandName?.[0]}</span>
             </div>
             <div className="flex items-center gap-1">
-              <SquareMousePointerIcon size={16} className="me-1" />
+              <SwitchTypeIcon size={16} className="me-1" />
               Switch Type: <span className="font-medium">{data?.properties?.switchType}</span>
             </div>
             <div className="flex items-center gap-1">
-              <LineChartIcon size={16} className="me-1" />
+              <ActuationIcon size={16} className="me-1" />
               Actuation Point: <span className="font-medium">{data?.properties?.actuation}±5g</span>
             </div>
             <div className="flex items-center gap-1">
-              <DropletsIcon size={16} className="me-1" />
+              <LubeIcon size={16} className="me-1" />
               Lube Status: <span className="font-medium">{data?.properties?.lubeStatus}</span>
             </div>
             <div className="flex items-center gap-1">
-              <PanelTopDashedIcon size={16} className="me-1" />
+              <TopHousingIcon size={16} className="me-1" />
               Top Housing: <span className="font-medium">{data?.properties?.topHousing}</span>
             </div>
             <div className="flex items-center gap-1">
-              <PanelBottomDashedIcon size={16} className="me-1" />
+              <BottomHousingIcon size={16} className="me-1" />
               Bottom Housing: <span className="font-medium">{data?.properties?.bottomHousing}</span>
             </div>
             <div className="flex items-center gap-1">
-              <LucideRectangleVertical size={16} className="me-1" />
+              <StemMaterialIcon size={16} className="me-1" />
               Stem Material: <span className="font-medium">{data?.properties?.stemMaterial}</span>
             </div>
             {/* {data?.price && <div className="flex items-center gap-1">
