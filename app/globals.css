@@ -92,9 +92,10 @@ article blockquote {
   @apply text-xs mb-10 italic text-center;
 }
 
-/* page bg */
+/* page bg — was url('/images/main-bg.png'), a lavender polka-dot pattern.
+   Kept lighter than the header's bg-cream (#fbf7f4). */
 body {
-  background-image: url('/images/main-bg.png');
+  background-color: #FFFFFF;
 }
 
 /* Header Styles */
