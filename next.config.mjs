@@ -8,20 +8,8 @@ const nextConfig = {
       // },
     ];
   },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io',
-        port: '',
-      },
-      {
-        protocol: 'https',
-        hostname: 'prod-files-secure.s3.us-west-2.amazonaws.com',
-        port: '',
-      }
-    ]
-  }
+  // All images are served through our own /api/v2/image proxy, so no
+  // external image hosts need to be whitelisted here.
 };
 
 export default nextConfig;

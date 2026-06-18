@@ -13,7 +13,7 @@ export default function PostHeader({ data }) {
     <div className="mx-auto max-w-screen-xl w-full my-16">
       <div className="grid grid-cols-1 md:grid-cols-3 overflow-hidden border-2 border-black shadow-retro md:flex-row-reverse bg-white">
         <div className="md:order-last">
-          <Image alt={data?.title} className="max-h-48 md:max-h-full w-full h-full object-cover transition-all" src={data?.mainImage?.asset?.url} height={280} width={280} />
+          <Image alt={data?.title} className="max-h-48 md:max-h-full w-full h-full object-cover transition-all" src={data?.mainImage || "/logo.jpg"} height={280} width={280} />
         </div>
         <div className="relative col-span-2 flex flex-col justify-center py-6 px-8 lg:px-16 lg:py-12 xl:px-24">
           <h1 className='text-xl md:text-[2.5rem] font-semibold leading-none mb-4 md:mb-8'>
@@ -23,7 +23,7 @@ export default function PostHeader({ data }) {
           <div className="flex flex-col items-start text-sm font-light mb-4 md:mb-8 gap-1 text-gray-600">
             <div className="flex items-center gap-1">
               <CaseSensitiveIcon size={16} className="me-1" />
-              Brand: <span className="font-medium">{data?.properties?.brandName[0]}</span>
+              Brand: <span className="font-medium">{data?.properties?.brandName?.[0]}</span>
             </div>
             <div className="flex items-center gap-1">
               <SquareMousePointerIcon size={16} className="me-1" />

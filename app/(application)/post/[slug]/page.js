@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import Image from "next/image";
-// import { PortableText } from '@portabletext/react'
 
 // Icons
 import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
@@ -18,7 +17,6 @@ import {
 } from "@/components/ui/carousel"
 
 import { cn } from "@/lib/utils";
-import getAssetUrl from "@/lib/sanity/getAssetUrl";
 
 import apiClient from "@/lib/apiClient";
 import PostHeader from "@/components/posts/PostHeader";
@@ -81,7 +79,7 @@ export default function Post({ params }) {
                   loop: true,
                 }}>
                   <CarouselContent>
-                    {data.properties?.gallery.map(({ name, file: { url } }, index) => (
+                    {data.properties?.gallery.map(({ name, url }, index) => (
                       <CarouselItem key={index} className="md:basis-1/2">
                         <Image
                           width={600} height={400}
@@ -106,7 +104,7 @@ export default function Post({ params }) {
               <h3 className="text-xl font-medium mb-4 mt-16">Comments</h3>
             </div>
             <DisqusComments
-              url={`https://keysandquests.com/posts/` + data.slug.current}
+              url={`https://keysandquests.com/post/` + data.slug}
               identifier={data._id}
               title={data.title}
             />
@@ -115,7 +113,7 @@ export default function Post({ params }) {
           <footer className="grid grid-cols-2 gap-4 max-w-screen-xl w-full mx-auto px-4 my-4">
             <div>
               {data.prev?.title && (
-                <a href={`/post/${data.prev.slug.current}`} className="h-full flex items-end gap-2 text-lg md:text-2xl font-medium leading-none text-gray-500 hover:text-gray-800 py-2">
+                <a href={`/post/${data.prev.slug}`} className="h-full flex items-end gap-2 text-lg md:text-2xl font-medium leading-none text-gray-500 hover:text-gray-800 py-2">
                   <ArrowLeftIcon className="h-8 w-8" />
                   <span>
                     <span className="text-xs md:text-sm mb-2">Previous Post</span>
@@ -127,7 +125,7 @@ export default function Post({ params }) {
             </div>
             <div>
               {data.next?.title && (
-                <a href={`/post/${data.next.slug.current}`} className="h-full flex text-end items-end justify-end gap-2 text-lg md:text-2xl font-medium leading-none text-gray-500 hover:text-gray-800 py-2">
+                <a href={`/post/${data.next.slug}`} className="h-full flex text-end items-end justify-end gap-2 text-lg md:text-2xl font-medium leading-none text-gray-500 hover:text-gray-800 py-2">
                   <span>
                     <span className="text-xs md:text-sm mb-2">Next Post</span>
                     <br />

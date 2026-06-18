@@ -44,7 +44,7 @@ export default function Filter({ brands, onFilter }) {
               className="w-[200px] justify-between pe-2"
             >
               {selectedBrand
-                ? brands.find((brand) => brand.slug.current === selectedBrand).name
+                ? brands.find((brand) => brand.name === selectedBrand)?.name
                 : "Select Brand..."}
               <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
@@ -57,15 +57,15 @@ export default function Filter({ brands, onFilter }) {
                 <CommandGroup>
                   {brands?.map((brand) => (
                     <CommandItem
-                      key={brand?._id}
-                      value={brand?.slug?.current}
+                      key={brand?.name}
+                      value={brand?.name}
                       className="cursor-pointer"
                       onSelect={(currentValue) => {
                         setSelectedBrand(currentValue === selectedBrand ? "" : currentValue)
                         setOpen(false)
                       }}
                     >
-                      {selectedBrand === brand?.slug?.current && <CheckIcon
+                      {selectedBrand === brand?.name && <CheckIcon
                         className={cn(
                           "mr-2 h-4 w-4",
                         )}

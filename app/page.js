@@ -16,7 +16,7 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get('/api/v1/posts');
+      const response = await axios.get('/api/v2/posts');
       setLoading(false);
 
       if (!response) return;
